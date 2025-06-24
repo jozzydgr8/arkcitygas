@@ -1,4 +1,44 @@
 import demoImage from './assets/arkcitylogo.png'
+import {
+  CheckOutlined,
+  UsergroupAddOutlined,
+  DollarCircleFilled,
+  TruckOutlined
+} from "@ant-design/icons";
+
+// Define your icon data as an array
+export const headerFeatures = [
+  {
+    icon: <CheckOutlined className="headericons" />,
+    title: "100%",
+    abouttitle:'100%',
+    subtitle: "Safety Guarantee",
+    abbtitle:"Safety"
+  },
+  {
+    icon: <TruckOutlined className="headericons" />,
+    title: "3-6 Hours",
+    abouttitle:'24/7',
+    subtitle: "Delivery Window",
+    abbtitle:"Delivery"
+  },
+   {
+    icon: <UsergroupAddOutlined className="headericons" />,
+    title: "84+",
+    abouttitle:"84+",
+    subtitle: "Happy Customers",
+    abbtitle:'Customers'
+  },
+  {
+    icon: <DollarCircleFilled className="headericons" />,
+    title: "Best",
+    subtitle: "Prices in Lagos"
+  },
+ 
+];
+
+
+
 export const serviceValues = [
   {
     title: "LPG Cylinder Refills",
@@ -82,5 +122,23 @@ export const productItems = [
     price: 850000,
     image: demoImage,
     category: "Bulk/Wholesale Supply"
+  }
+];
+
+export const adItems = [
+  {
+    label: "Today",
+    text: "Order before 12pm to get same day delivery",
+    button: { title: "Order Now", show: true }
+  },
+  {
+    label: "New",
+    text: "Bulk Discounts for Commercial Customers",
+    button: { title: "Inquire", show: true }
+  },
+  {
+    label: "Offer",
+    text: "Free Hose & Regulator with New Cylinder Purchase",
+    button: { title:'View Products', show: true }
   }
 ];

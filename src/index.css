@@ -1,8 +1,13 @@
 :root{
   --color-darkblue:#004A8D;
+  --color-lightblue:#0b60af;
   --color-orange:#F26A21;
   --color-offwhite: #F6F5F3;
 }
+section > .container-fluid{
+  padding: 5% 3%;
+}
+
 body{
   background: var(--color-offwhite);
 }
@@ -19,11 +24,22 @@ nav .container-fluid{
   width:30%;
 
 }
+.btn{
+  margin:2px
+}
 .btndark, .btndark:hover{
   background-color: var(--color-darkblue);
   color: white;
 }
+.btnalternate,.btnalternate:hover{
+  background-color: var(--color-lightblue);
+  color: white;
+}
+.btnlight, .btnlight:hover{
+  border: solid 1px var(--color-darkblue);
+  color: var(--color-darkblue);
 
+}
 .nav-link{
   color: var(--color-black) !important;
    white-space: nowrap;
@@ -39,7 +55,45 @@ nav .container-fluid{
   }
 }
 
+/* header header headre */
+.headericons {
+  color: white;
+  background: var(--color-darkblue);
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 8px;
+}
+/* advert advert advert section */
+#advert{
+  background-color: var(--color-darkblue);
+  color: white;
+}
+.advert-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* pushes button to bottom */
+  height: 100%; /* full height of parent */
+  padding: 20px;
+  border-radius: 6px;
+}
+.advert-box .btnalternate {
+  align-self: start;
+}
 
+.adverthighlight{
+  border: solid 1px var(--color-offwhite);
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* about about about section */
+.aboutcard{
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px -1px var(--color-darkblue);
+}
 /* product/service */
 .servicegrid {
   display: flex;

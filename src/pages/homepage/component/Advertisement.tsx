@@ -1,0 +1,24 @@
+import { adItems } from "../../../data"
+import { FlatButton } from "../../../shared/FlatButton"
+
+export const Advertisement = ()=>{
+    return(
+        <section id="advert">
+            <div className="container-fluid">
+                <div className="row">
+                    { adItems.map((item, index) => (
+                        <div className="col-md-4" key={index}>
+                        <div className="advert-box" >
+                            <div className="adverthighlight">{item.label}</div>
+                            <p>{item.text}</p>
+                            {item.button.show && (
+                            <FlatButton className="btnalternate" title={item.button.title} />
+                            )}
+                        </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )
+}
