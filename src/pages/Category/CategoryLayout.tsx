@@ -1,26 +1,88 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { productItems } from "../../data";
 import { FlatButton } from "../../shared/FlatButton";
-import { Modal, Input } from "antd";
-import { Formik } from "formik";
+import { dataType, ProductType } from "../../shared/types";
+import { ModalComponent } from "../homepage/component/ModalComponent";
 
 export const CategoryLayout = ()=>{
-    type ProductType = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
+const [dataSubmit, setDataSubmit] = useState({} as dataType)
+const {category} = useParams();
+const [products, setProducts] = useState<ProductType[]>([])
+const [isOpen, setIsOpen] = useState(false);
+const [selectedService, setSelectedService] = useState<ProductType | null>(null);
+const [proceedPayment, setProceedPayment] =useState(false);
+const [loading, setLoading] = useState(false);
+const navigate = useNavigate();
+//get categories
+const items = productItems.filter(items=>items.category.toString()==category);
+//useffect to fetch categories
+useEffect(() => {
+  if (!items) {
+    navigate('/arkcitygas', { replace: true });
+    return;
+  }
+
+  setProducts(items);
+  console.log(items);
+}, []);
+
+
+    
+ //handle finish on succesful payment
+ const handleFinish = ()=>{
+    // setLoading(true);
+    console.log('success')
+  }   
+//  const publicKey = process.env.REACT_APP_Pay_PublicKey!;
+  const publicKey ='pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea';
+
+   const componentProp = {
+  email: dataSubmit.email,
+  amount: selectedService?.price! * 100,
+  metadata: {
+    custom_fields: [
+      {
+        display_name: "Full Name",
+        variable_name: "name",
+        value: dataSubmit.name
+      },
+      {
+        display_name: "Phone Number",
+        variable_name: "phone",
+        value: dataSubmit.phone
+      },
+      {
+        display_name: "Email Address",
+        variable_name: "email",
+        value: dataSubmit.email
+      },
+      {
+        display_name: "Address",
+        variable_name: "address",
+        value: dataSubmit.address
+      },
+      {
+        display_name: "Product / Service",
+        variable_name: "bookingType",
+        value: selectedService?.title
+      },
+      {
+        display_name: "category",
+        variable_name: "service",
+        value: selectedService?.category
+      }
+    ]
+  },
+  publicKey,
+  text: `Pay now ₦${selectedService?.price.toLocaleString()}`,
+  onSuccess: () => {
+    handleFinish();
+  },
+  onClose: () => {
+    alert('You have closed the payment modal');
+  }
 };
-
-
-
-    const {id} = useParams();
-    const [products, setProducts] = useState<ProductType[]>([])
-    const [isOpen, setIsOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState<ProductType | null>(null);
 
     const handleOpenModal = (service:ProductType) => {
         setSelectedService(service);
@@ -31,12 +93,7 @@ export const CategoryLayout = ()=>{
         setIsOpen(false);
         setSelectedService(null);
       };
-    useEffect(()=>{
-        if(!id) return;
-        const items = productItems.filter(items=>items.category.toString()==id);
-        setProducts(items);
-        console.log(items)
-    },[])
+    
     return (
         <section>
             <div className="container-fluid">
@@ -88,7 +145,7 @@ export const CategoryLayout = ()=>{
                         <FlatButton
                             className="btndark"
                             onClick={() => handleOpenModal(product)}
-                            title={`BUY NOW`}
+                            title={`BUY NOW - ₦${product.price}`}
                         />
                         </div>
                     </div>
@@ -98,113 +155,17 @@ export const CategoryLayout = ()=>{
 
 
                 {/* //modal modal */}
-                        <Modal
-                        open={isOpen}
-                        title={selectedService?.title}
-                        onCancel={handleCloseModal}
-                        footer={null}
-                        >
-                        <p>{selectedService?.description}</p>
+                       <ModalComponent 
+                        componentProp={componentProp}
+                        isOpen={isOpen}
+                        selectedService={selectedService}
+                        handleCloseModal={handleCloseModal}
+                        loading={loading}
+                        setDataSubmit={setDataSubmit}
+                        setProceedPayment={setProceedPayment}
+                        proceedPayment={proceedPayment}
+                        />
 
-                        <Formik
-                        initialValues={{
-                            size:'',
-                            name: '',
-                            phone: '',
-                            email: '',
-                            location: '',
-                            message: '',
-                            date: null,
-                            service: selectedService?.title || '',
-                        }}
-                        onSubmit={(values) => {
-                            console.log(values); // Call your backend handler here
-                        }}
-                        >
-                        {(formik) => (
-                            <form onSubmit={formik.handleSubmit}>
-                            <Input
-                                name="name"
-                                value={formik.values.name}
-                                onChange={formik.handleChange}
-                                placeholder="Full Name"
-                                style={{ marginBottom: '1rem' }}
-                                required
-                            />
-
-                            <Input
-                                name="phone"
-                                value={formik.values.phone}
-                                onChange={formik.handleChange}
-                                placeholder="Phone Number"
-                                style={{ marginBottom: '1rem' }}
-                                required
-                            />
-
-                            <Input
-                                name="email"
-                                value={formik.values.email}
-                                onChange={formik.handleChange}
-                                placeholder="Email (optional)"
-                                style={{ marginBottom: '1rem' }}
-                            />
-
-                            <Input
-                                name="location"
-                                value={formik.values.location}
-                                onChange={formik.handleChange}
-                                placeholder="Delivery Address"
-                                style={{ marginBottom: '1rem' }}
-                                required
-                            />
-
-                            <Input
-                                name="size"
-                                value={formik.values.size}
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    // Only allow numbers or empty string
-                                    if (/^\d*$/.test(value)) {
-                                    formik.setFieldValue('size', value);
-                                    }
-                                }}
-                                placeholder="The size in kg"
-                                type="text" // use text to prevent browser interfering with empty string
-                                style={{ marginBottom: '1rem' }}
-                                required
-                                />
-
-
-                            <Input.TextArea
-                                name="message"
-                                value={formik.values.message}
-                                onChange={formik.handleChange}
-                                placeholder="Additional Notes"
-                                rows={3}
-                                style={{ marginBottom: '1rem' }}
-                            />
-
-                            {/* <DatePicker
-                                name="date"
-                                style={{ width: '100%', marginBottom: '1rem' }}
-                                placeholder="Preferred Date (optional)"
-                                onChange={(date, dateString) =>
-                                formik.setFieldValue('date', dateString)
-                                }
-                            /> */}
-
-                            {/* Hidden Service Title Field */}
-                            <input
-                                type="hidden"
-                                name="service"
-                                value={formik.values.service}
-                            />
-
-                            <FlatButton title="submit" className="btndark"/>
-                            </form>
-                        )}
-                        </Formik>
-                    </Modal>
     
             </div>
         </section>

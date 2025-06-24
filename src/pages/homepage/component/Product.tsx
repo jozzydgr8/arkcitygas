@@ -17,11 +17,11 @@ export const Product = () => {
   return (
     <section>
       <div className="container-fluid">
-        <h2>Our Services</h2>
+        <h2>Categories</h2>
         <div className="servicegrid">
           {serviceValues.map((service, index) => (
             <Link
-            to={`${service.title}`}
+            to={`/arkcitygas/${service.title}`}
               key={index}
               className="servicegridcontent animate-up"
               style={{

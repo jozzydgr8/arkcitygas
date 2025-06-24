@@ -7,7 +7,7 @@ function App() {
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/arkcitygas' element={<Layout/>}>
       <Route index element={<Home/>}/>
-      <Route path='/:id' element={<CategoryLayout/>}/>
+      <Route path=':category' element={<CategoryLayout/>}/>
     </Route>
   ))
   return (
