@@ -5,9 +5,9 @@ import { CategoryLayout } from './pages/Category/CategoryLayout';
 
 function App() {
   const router = createBrowserRouter(createRoutesFromElements(
-    <Route path='/' element={<Layout/>}>
+    <Route path='/arkcitygas' element={<Layout/>}>
       <Route index element={<Home/>}/>
-      <Route path=':id' element={<CategoryLayout/>}/>
+      <Route path='/:id' element={<CategoryLayout/>}/>
     </Route>
   ))
   return (
