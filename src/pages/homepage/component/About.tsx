@@ -11,7 +11,7 @@ export const About = ()=>{
                         <p>Arkcity LPG is committed to providing safe, reliable and affordable cooking gas
                             delivery services to homes and businesses across Ikorodu and Lagos.
                         </p>
-                        <Row>
+                        <Row gutter={[16,24]}>
                             {
                                 headerFeatures.slice(0, headerFeatures.length-1).map((feature, index)=>(
                                     <Col xs={24} md={8} sm={12} key={index}>
@@ -40,7 +40,7 @@ export const About = ()=>{
 
 
                 <div>
-                    <Row>
+                    <Row gutter={[16,24]}>
                         {aboutFeatures.map((feature, index)=>(
                             <Col xs={24} sm={12} md={8}>
                             <div className="aboutcard">
