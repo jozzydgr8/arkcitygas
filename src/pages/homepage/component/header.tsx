@@ -30,15 +30,16 @@ export const Header = ()=>{
                         </p>
                         <div>
                             <FlatButton title="Order Gas Now" className="btndark"/>
-                            <FlatButton title="Call Us Now" className="btnlight"/>
+                            
 
                         </div>
+                        <a href="tel:" target="_blank">Call Us Now</a>
                     </div>
 
 
                      <div className="col-md-6">
                         <div className="row">
-                        <h3>Why Choose Arkcity</h3>
+                        <h3>Why Choose Arkcity?</h3>
                         {headerFeatures.map((feature, index) => (
                         <div key={index} className="col-md-6" style={{...styles.content, flexDirection:'row'}}>
                             {feature.icon}
