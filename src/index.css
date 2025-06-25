@@ -89,10 +89,30 @@ nav .container-fluid{
 
 /* about about about section */
 .aboutcard{
+   display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* pushes button to bottom */
+  height: 100%;
   background: white;
   padding: 30px;
+  margin: 5px;
   border-radius: 15px;
   box-shadow: 0 4px 6px -1px var(--color-darkblue);
+}
+.aboutIcons{
+  color: var(--color-lightblue);
+  background: var(--color-offwhite);
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 80%;
+}
+.aboutIcons:hover{
+  background-color: var(--color-lightblue);
+  color: var(--color-offwhite);
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 80%;
+  cursor: pointer;
 }
 /* product/service */
 .servicegrid {

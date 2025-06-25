@@ -3,7 +3,9 @@ import {
   CheckOutlined,
   UsergroupAddOutlined,
   DollarCircleFilled,
-  TruckOutlined
+  TruckOutlined,
+  BulbOutlined,
+  HeartOutlined
 } from "@ant-design/icons";
 
 // Define your icon data as an array
@@ -142,3 +144,21 @@ export const adItems = [
     button: { title:'View Products', show: true }
   }
 ];
+
+export const aboutFeatures = [
+  {
+    title:'Our Mission',
+    description:'To provide reliable and affordable cooking gas solutions to every home and business in Lagos, with unmatched customer service and quick delivery',
+    icon:<CheckOutlined className='aboutIcons'/>
+  },
+  {
+    title:'Our Vision',
+    description:'To become the most trusted LPG delivery service in Nigeria, Known for safety, reliability and customer satisfaction.',
+    icon:<BulbOutlined className='aboutIcons'/>
+  },
+  {
+    title:'Our Values',
+    description:'Safety first, reliability, transparency, and continuous improvement in all we do.',
+    icon:<HeartOutlined className='aboutIcons'/>
+  }
+]
