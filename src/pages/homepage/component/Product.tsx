@@ -1,6 +1,5 @@
-import { serviceValues } from "../../../data";
-import { FlatButton } from "../../../shared/FlatButton";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { CategoryLayout } from "../../Category/CategoryLayout";
 
 
 
@@ -9,70 +8,20 @@ import { Link } from "react-router-dom";
 
 
 export const Product = () => {
- 
-  
-
-  
-
+  const [active, setActive] = useState('All Products');
   return (
     <section>
       <div className="container-fluid">
-        <h2>Categories</h2>
-        <div className="servicegrid">
-          {serviceValues.map((service, index) => (
-            <Link
-            to={`/arkcitygas/${service.title}`}
-              key={index}
-              className="servicegridcontent animate-up"
-              style={{
-                border: "solid 1px #d7d9d6",
-                color: "black",
-                borderRadius: "20px",
-                background: "white",
-                display: "flex",
-                flexDirection: "column",
-                overflow: "hidden",
-                textDecoration: "none",
-              }}
-            >
-              {/* Top image section */}
-              <div
-                style={{
-                  backgroundImage: `url(${service.backgroundImage})`,
-                  height: "200px",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center center",
-                  backgroundRepeat: "no-repeat",
-                }}
-              ></div>
+        <h2>Our Products</h2>
+        <p style={{textAlign:"center"}}>High Quality LPG cylinders and accessories at competitive prices</p>
+          <div className='product-category-menu'>
+            <h4 onClick={() => setActive('All Products')} className={active === 'All Products' ? 'menu-active' : 'productcategory'}>All Products</h4>
+            <h4 onClick={() => setActive('Refills')} className={active === 'Refills' ? 'menu-active' : 'productcategory'}>Refills</h4>
+            <h4 onClick={() => setActive('cylinders')} className={active === 'cylinders' ? 'menu-active' : 'productcategory'}>Cylinders</h4>
+            <h4 onClick={() => setActive('accessories')} className={active === 'accessories' ? 'menu-active' : 'productcategory'}>Accessories</h4>
+          </div>
 
-              {/* Content section */}
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  flex: 1,
-                  padding: "15px",
-                }}
-              >
-                <h3
-                  style={{ textTransform: "capitalize" }}
-                   
-                >{service.title }</h3>
-                <p>{service.description}</p>
-
-                {/* Button to open modal */}
-                <div style={{ marginTop: "auto" }}>
-                  <FlatButton
-                    className="btndark"
-                    onClick={() => console.log('')}
-                    title={`VIEW NOW`}
-                  />
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+            <CategoryLayout active={active}/>
 
        
       </div>

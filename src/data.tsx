@@ -5,7 +5,9 @@ import {
   DollarCircleFilled,
   TruckOutlined,
   BulbOutlined,
-  HeartOutlined
+  HeartOutlined,
+  ShoppingCartOutlined,
+  WalletOutlined
 } from "@ant-design/icons";
 
 // Define your icon data as an array
@@ -83,7 +85,7 @@ export const productItems = [
     description: "Standard 12.5kg LPG cylinder, perfect for home cooking needs.",
     price: 18000,
     image: demoImage,
-    category: "LPG Cylinder Refills"
+    category: "Refills"
   },
   {
     id: 2,
@@ -91,7 +93,7 @@ export const productItems = [
     description: "Quick 6kg cylinder exchange with safety-checked prefilled gas.",
     price: 9000,
     image: demoImage,
-    category: "Cylinder Exchange Program"
+    category: "Refills"
   },
   {
     id: 3,
@@ -99,7 +101,7 @@ export const productItems = [
     description: "Purchase a brand new 6kg LPG cylinder with safety valve.",
     price: 16000,
     image: demoImage,
-    category: "New Cylinder Sales"
+    category: "cylinders"
   },
   {
     id: 4,
@@ -107,7 +109,7 @@ export const productItems = [
     description: "Complete LPG connection kit including regulator and 1.5m hose.",
     price: 3500,
     image: demoImage,
-    category: "Kits (Regulator and Hose Kits)"
+    category: "accessories"
   },
   {
     id: 5,
@@ -162,3 +164,73 @@ export const aboutFeatures = [
     icon:<HeartOutlined className='aboutIcons'/>
   }
 ]
+
+export const HowItWorksFeatures = [
+  {
+    title:'Place your Order',
+    description:'Order online or call us directly, Specify your preferred delivery time and payment method.',
+    icon:<ShoppingCartOutlined className='aboutIcons'/>
+  },
+  {
+    title:'Make Payment',
+    description:'Pay online via bank transfer, or cash on delivery. Upload payment proof if required',
+    icon:<WalletOutlined className='aboutIcons'/>
+  },
+  {
+    title:'We Deliver',
+    description:'Our certified delivery team brings your gas cylinder to your doorstep within hours.',
+    icon:<TruckOutlined className='aboutIcons'/>
+  },
+  {
+    title:'Enjoy Cooking',
+    description:'Receive your gas and enjoy safe, efficient cooking with out quality LPG products.',
+    icon:<CheckOutlined className='aboutIcons'/>
+  }
+]
+
+
+
+const reviews = [
+  {
+    fullName: "Grace Adeniran",
+    rating: 5,
+    description: "Fast delivery and excellent service. I’ve never had any safety concerns using Arkcity Gas.",
+    status: "Regular Customer",
+    image: demoImage,
+  },
+  {
+    fullName: "Michael Obi",
+    rating: 4,
+    description: "Reliable supplier for my restaurant. Bulk orders are always on time.",
+    status: "Bulk Buyer",
+    image: demoImage,
+  },
+  {
+    fullName: "Fatima Bello",
+    rating: 5,
+    description: "Tried them for the first time and I’m impressed. Will definitely order again.",
+    status: "First-Time Customer",
+    image: demoImage,
+  },
+  {
+    fullName: "Chidi Okafor",
+    rating: 4,
+    description: "Great service but I’d love even faster deliveries in the evenings.",
+    status: "Regular Customer",
+    image: demoImage,
+  },
+  {
+    fullName: "Ngozi Umeh",
+    rating: 5,
+    description: "Highly professional and safety-conscious. Their service is top-notch!",
+    status: "Bulk Buyer",
+    image: demoImage,
+  },
+  {
+    fullName: "David Olawale",
+    rating: 3,
+    description: "Service was okay, but I think the ordering process can be improved.",
+    status: "First-Time Customer",
+    image: demoImage,
+  }
+];

@@ -5,27 +5,20 @@ import { FlatButton } from "../../shared/FlatButton";
 import { dataType, ProductType } from "../../shared/types";
 import { ModalComponent } from "../homepage/component/ModalComponent";
 
-export const CategoryLayout = ()=>{
+type props = {
+  active:string
+}
+export const CategoryLayout = ({active}:props)=>{
 const [dataSubmit, setDataSubmit] = useState({} as dataType)
-const {category} = useParams();
-const [products, setProducts] = useState<ProductType[]>([])
 const [isOpen, setIsOpen] = useState(false);
 const [selectedService, setSelectedService] = useState<ProductType | null>(null);
 const [proceedPayment, setProceedPayment] =useState(false);
 const [loading, setLoading] = useState(false);
-const navigate = useNavigate();
 //get categories
-const items = productItems.filter(items=>items.category.toString()==category);
-//useffect to fetch categories
-useEffect(() => {
-  if (!items) {
-    navigate('/arkcitygas', { replace: true });
-    return;
-  }
+const items = active === "All Products" ? productItems : productItems.filter(item => item.category.toString() === active);
 
-  setProducts(items);
-  console.log(items);
-}, []);
+//useffect to fetch categories
+
 
 
     
@@ -95,10 +88,12 @@ useEffect(() => {
       };
     
     return (
-        <section>
-            <div className="container-fluid">
-                {
-                    products.map(product=>(
+       
+                <>
+                <h2>{active}</h2>
+                <div className="servicegrid">
+{
+                    items.map(product=>(
                 <div
             
                     key={product.id}
@@ -165,9 +160,10 @@ useEffect(() => {
                         setProceedPayment={setProceedPayment}
                         proceedPayment={proceedPayment}
                         />
+                </div>
+                
 
     
-            </div>
-        </section>
+</>
     )
 }

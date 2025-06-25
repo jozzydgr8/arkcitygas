@@ -34,7 +34,11 @@ export const About = ()=>{
                     </div>
 
                     <div className="col-md-6">
-                        this will contain image collage
+                        <div className="image-container">
+                        <div className="top-box"></div>
+                        <div className="bottom-box"></div>
+                        </div>
+
                     </div>
                 </div>
 

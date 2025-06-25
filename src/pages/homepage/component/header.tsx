@@ -28,6 +28,7 @@ export const Header = ()=>{
 
                      <div className="col-md-6">
                         <div className="row">
+                        <h3>Why Choose Arkcity</h3>
                         {headerFeatures.map((feature, index) => (
                         <div key={index} className="col-md-6" style={{...styles.content, flexDirection:'row'}}>
                             {feature.icon}
