@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/arkcitygas/static/css/main.e6c54c75.css",
-    "main.js": "/arkcitygas/static/js/main.304b7b6f.js",
+    "main.css": "/arkcitygas/static/css/main.f7997a08.css",
+    "main.js": "/arkcitygas/static/js/main.ec0ec704.js",
     "static/js/453.670e15c7.chunk.js": "/arkcitygas/static/js/453.670e15c7.chunk.js",
     "static/media/arkcitylogo.png": "/arkcitygas/static/media/arkcitylogo.3feed38b8b14d3710c23.png",
     "index.html": "/arkcitygas/index.html",
-    "main.e6c54c75.css.map": "/arkcitygas/static/css/main.e6c54c75.css.map",
-    "main.304b7b6f.js.map": "/arkcitygas/static/js/main.304b7b6f.js.map",
+    "main.f7997a08.css.map": "/arkcitygas/static/css/main.f7997a08.css.map",
+    "main.ec0ec704.js.map": "/arkcitygas/static/js/main.ec0ec704.js.map",
     "453.670e15c7.chunk.js.map": "/arkcitygas/static/js/453.670e15c7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c54c75.css",
-    "static/js/main.304b7b6f.js"
+    "static/css/main.f7997a08.css",
+    "static/js/main.ec0ec704.js"
   ]
 }
