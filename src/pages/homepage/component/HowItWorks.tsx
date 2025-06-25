@@ -1,6 +1,18 @@
 import { Col, Row } from "antd"
 import { HowItWorksFeatures } from "../../../data"
 import { FlatButton } from "../../../shared/FlatButton"
+import deliveryman from '../../../assets/deliveryman.jpg';
+
+const Styles = {
+    container:{
+        backgroundImage:`url(${deliveryman})`,
+        backgroundSize:'cover',
+        backgroundRepeat:'no-repeat',
+        backgroundPosition:'center center',
+        minHeight:'400px',
+        borderRadius:'12px'
+    }
+}
 
 export const HowItWorks = ()=>{
     return(
@@ -9,7 +21,7 @@ export const HowItWorks = ()=>{
                 <h2>How It Works</h2>
                 <p style={{textAlign:'center'}}>Getting your cooking gas delivered has never been easier</p>
                 <div className="row">
-                    <div className="col-md-5">
+                    <div className="col-md-5 howbackground" style={Styles.container}>
 
                     </div>
                     <div className="col-md-7">
