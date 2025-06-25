@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/arkcitygas/static/css/main.bce4f2e1.css",
-    "main.js": "/arkcitygas/static/js/main.43c615be.js",
+    "main.css": "/arkcitygas/static/css/main.fd9f198b.css",
+    "main.js": "/arkcitygas/static/js/main.afa79aab.js",
     "static/js/453.670e15c7.chunk.js": "/arkcitygas/static/js/453.670e15c7.chunk.js",
     "static/media/cookingfamily.jpg": "/arkcitygas/static/media/cookingfamily.5be8e61cbf028fa728f3.jpg",
     "static/media/arkcitylogo.png": "/arkcitygas/static/media/arkcitylogo.3feed38b8b14d3710c23.png",
     "static/media/deliveryman.jpg": "/arkcitygas/static/media/deliveryman.cd26de626929dc14d02a.jpg",
+    "static/media/gascylinderbackground.jpg": "/arkcitygas/static/media/gascylinderbackground.28bc8cc16a4b5b9fdd2a.jpg",
     "index.html": "/arkcitygas/index.html",
-    "main.bce4f2e1.css.map": "/arkcitygas/static/css/main.bce4f2e1.css.map",
-    "main.43c615be.js.map": "/arkcitygas/static/js/main.43c615be.js.map",
+    "main.fd9f198b.css.map": "/arkcitygas/static/css/main.fd9f198b.css.map",
+    "main.afa79aab.js.map": "/arkcitygas/static/js/main.afa79aab.js.map",
     "453.670e15c7.chunk.js.map": "/arkcitygas/static/js/453.670e15c7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bce4f2e1.css",
-    "static/js/main.43c615be.js"
+    "static/css/main.fd9f198b.css",
+    "static/js/main.afa79aab.js"
   ]
 }
