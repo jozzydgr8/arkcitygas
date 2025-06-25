@@ -4,7 +4,6 @@ import Navbar from "./shared/Navbar"
 export const Layout = ()=>{
     return(
          <>
-         <Navbar/>
         <Outlet/>
         </>
     )

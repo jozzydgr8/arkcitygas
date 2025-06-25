@@ -1,16 +1,26 @@
 import { headerFeatures } from "../../../data";
 import { FlatButton } from "../../../shared/FlatButton";
+import gasbackground from '../../../assets/gascylinderbackground.jpg'
+import Navbar from "../../../shared/Navbar";
 
 const styles = {
     content:{
         display:'flex',
         margin:'15px 0',
         gap:'10px'
+    },
+    section:{
+        backgroundImage:`url(${gasbackground})`,
+        backgroundSize:'cover',
+        backgroundPosition:'center center',
+        color:'white',
+        minHeight:'80vh'
     }
 }
 export const Header = ()=>{
     return(
-        <section>
+        <section style={styles.section}>
+            <Navbar/>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-6">

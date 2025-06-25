@@ -47,7 +47,7 @@ export const Choose = ()=>{
                     <div>
                         <FlatButton title="Order Now" className="btndark"/>  
                          <a href="tel:+2348123456789">
-                            Call +234 812 345 6789
+                            Call+234 812 345 6789
                          </a>
                     </div>
                 </div>

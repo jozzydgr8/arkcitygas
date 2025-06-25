@@ -12,6 +12,10 @@ body{
   background: var(--color-offwhite);
    font-family: 'Padauk', sans-serif;
 }
+a{
+  color: inherit;
+  text-decoration: none;
+}
 .row{
   margin: 0;
   padding: 0;
@@ -70,8 +74,8 @@ nav .container-fluid{
 
 /* header header headre */
 .headericons {
-  color: white;
-  background: var(--color-darkblue);
+  color: var(--color-darkblue);
+  background: var(--color-offwhite);
   padding: 10px;
   font-size: 30px;
   border-radius: 8px;
@@ -477,5 +481,10 @@ input:-webkit-autofill {
   scroll-behavior: smooth;
   animation: backInRight;
   animation-duration: 1.2s;
+}
+
+.footer{
+  background-color: var(--color-lightblue);
+  color: white;
 }
 

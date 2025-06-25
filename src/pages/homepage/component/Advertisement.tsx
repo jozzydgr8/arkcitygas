@@ -4,7 +4,7 @@ import { FlatButton } from "../../../shared/FlatButton"
 export const Advertisement = ()=>{
     return(
         <section id="advert">
-            <div className="container-fluid">
+            <div>
                 <div className="row">
                     { adItems.map((item, index) => (
                         <div className="col-md-4" key={index}>

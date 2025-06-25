@@ -1,4 +1,5 @@
 
+import Footer from "../../shared/Footer"
 import { About } from "./component/About"
 import { Advertisement } from "./component/Advertisement"
 import { Choose } from "./component/Choose"
@@ -17,6 +18,7 @@ export const Home = ()=>{
         <HowItWorks/>
         <Reviews/>
         <Choose/>
+        <Footer/>
         </>
     )
 }
