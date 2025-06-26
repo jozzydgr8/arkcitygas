@@ -190,13 +190,13 @@ export const HowItWorksFeatures = [
 
 
 
-const reviews = [
+export const reviews = [
   {
     fullName: "Grace Adeniran",
     rating: 5,
     description: "Fast delivery and excellent service. I’ve never had any safety concerns using Arkcity Gas.",
     status: "Regular Customer",
-    image: demoImage,
+    // image: demoImage,
   },
   {
     fullName: "Michael Obi",
@@ -217,7 +217,7 @@ const reviews = [
     rating: 4,
     description: "Great service but I’d love even faster deliveries in the evenings.",
     status: "Regular Customer",
-    image: demoImage,
+    // image: demoImage,
   },
   {
     fullName: "Ngozi Umeh",
@@ -231,6 +231,6 @@ const reviews = [
     rating: 3,
     description: "Service was okay, but I think the ordering process can be improved.",
     status: "First-Time Customer",
-    image: demoImage,
+    // image: demoImage,
   }
 ];

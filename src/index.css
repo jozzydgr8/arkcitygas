@@ -116,6 +116,7 @@ nav .container-fluid{
   border-radius: 15px;
   box-shadow: 0 4px 6px -1px var(--color-darkblue);
 }
+/*  */
 .aboutIcons{
   color: var(--color-lightblue);
   background: var(--color-offwhite);
@@ -487,4 +488,5 @@ input:-webkit-autofill {
   background-color: var(--color-lightblue);
   color: white;
 }
+
 
