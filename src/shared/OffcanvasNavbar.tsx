@@ -17,17 +17,17 @@ export const OffcanvasNavbar = ()=>{
             <div className="offcanvas-body">
                 <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li className="nav-item">
-                    <NavLink className="nav-link active" aria-current="page" to="#">Dashboard</NavLink>
+                    <NavLink className="nav-link active" aria-current="page" to="/admin_jctbdil1$">Dashboard</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="#">Manage Orders</NavLink>
+                    <NavLink className="nav-link" to="/admin_jctbdil1$/manageorders">Manage Orders</NavLink>
                 </li>
                 <li className="nav-item dropdown">
                     <NavLink className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     More
                     </NavLink>
                     <ul className="dropdown-menu">
-                    <li><NavLink className="dropdown-item" to="#">Add New Product <PlusOutlined/></NavLink></li>
+                    <li><NavLink className="dropdown-item" to="/admin_jctbdil1$/product/addproduct">Add New Product <PlusOutlined/></NavLink></li>
                     <li><NavLink className="dropdown-item" to="#">Send News Letter</NavLink></li>
                     <li>
                         <hr className="dropdown-divider"/>

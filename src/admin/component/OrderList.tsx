@@ -1,6 +1,7 @@
 import { orders } from "../../data"
 import styles from '../admin.module.css'
 import { FlatButton } from "../../shared/FlatButton"
+import { NavLink } from "react-router-dom"
 export const OrderList = ()=>{
     return(
        
@@ -16,7 +17,7 @@ export const OrderList = ()=>{
                     ))
                 }
                 </div>
-                <div><FlatButton title='Manage Orders' className="btndark"/></div>
+                <div><NavLink to={'/admin_jctbdil1$/manageorders'}><FlatButton title='Manage Orders' className="btndark"/></NavLink></div>
             </>
      
     )

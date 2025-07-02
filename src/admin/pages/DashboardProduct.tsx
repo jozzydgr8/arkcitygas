@@ -5,7 +5,7 @@ import {EditOutlined} from '@ant-design/icons'
 import Style from '../admin.module.css'
 import { FlatButton } from "../../shared/FlatButton";
 import { useState } from "react";
-import { UpdateProduct } from "./UpdateProduct";
+import { UpdateProduct } from "../Modals/UpdateProduct";
 
 const styles = {
     backgroundImage:{

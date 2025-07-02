@@ -240,17 +240,18 @@ export const reviews = [
 
 //admon  test test
 export const orders = [
-  { id: 'ORD001', name: 'John Doe' },
-  { id: 'ORD002', name: 'Jane Smith' },
-  { id: 'ORD003', name: 'Michael Johnson' },
-  { id: 'ORD004', name: 'Emily Davis' },
-  { id: 'ORD005', name: 'Chris Lee' },
-  { id: 'ORD006', name: 'Sarah Wilson' },
-  { id: 'ORD007', name: 'David Martinez' },
-  { id: 'ORD008', name: 'Laura Brown' },
-  { id: 'ORD009', name: 'Daniel Anderson' },
-  { id: 'ORD010', name: 'Jessica Thompson' },
+  { id: 'ORD001', name: 'John Doe', status: 'completed' },
+  { id: 'ORD002', name: 'Jane Smith', status: 'pending' },
+  { id: 'ORD003', name: 'Michael Johnson', status: 'shipped' },
+  { id: 'ORD004', name: 'Emily Davis', status: 'completed' },
+  { id: 'ORD005', name: 'Chris Lee', status: 'pending' },
+  { id: 'ORD006', name: 'Sarah Wilson', status: 'shipped' },
+  { id: 'ORD007', name: 'David Martinez', status: 'completed' },
+  { id: 'ORD008', name: 'Laura Brown', status: 'pending' },
+  { id: 'ORD009', name: 'Daniel Anderson', status: 'shipped' },
+  { id: 'ORD010', name: 'Jessica Thompson', status: 'completed' },
 ];
+
 
 export const subscribers = [
   { id: 1, email: 'user1@example.com' },

@@ -39,7 +39,7 @@ export const ProductList = ()=>{
         </Marquee>
         
         <div>
-            <NavLink to={'/'}>
+            <NavLink to={'/admin_jctbdil1$/product/addproduct'}>
             <FlatButton className="btnlight" icon={<PlusOutlined/>}>
                 Add New Product 
             </FlatButton>

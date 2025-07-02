@@ -78,6 +78,7 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
                     name="phone"
                     value={formik.values.phone}
                     onChange={formik.handleChange}
+                    type="number"
                     placeholder="Phone Number"
                     style={{ marginBottom: '1rem' }}
                     required
