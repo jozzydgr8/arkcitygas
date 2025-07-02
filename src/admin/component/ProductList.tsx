@@ -28,7 +28,7 @@ export const ProductList = ()=>{
                             {product.title}
                         </strong>
                         <div>
-                            <FlatButton title="View Product" className="btndark"/>
+                            <NavLink to={`/admin_jctbdil1$/product/${product.id}`}><FlatButton title="View Product" className="btndark"/></NavLink>
                         </div>
                     </div>
                    
