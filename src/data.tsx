@@ -234,3 +234,29 @@ export const reviews = [
     // image: demoImage,
   }
 ];
+
+
+
+
+//admon  test test
+export const orders = [
+  { id: 'ORD001', name: 'John Doe' },
+  { id: 'ORD002', name: 'Jane Smith' },
+  { id: 'ORD003', name: 'Michael Johnson' },
+  { id: 'ORD004', name: 'Emily Davis' },
+  { id: 'ORD005', name: 'Chris Lee' },
+  { id: 'ORD006', name: 'Sarah Wilson' },
+  { id: 'ORD007', name: 'David Martinez' },
+  { id: 'ORD008', name: 'Laura Brown' },
+  { id: 'ORD009', name: 'Daniel Anderson' },
+  { id: 'ORD010', name: 'Jessica Thompson' },
+];
+
+export const subscribers = [
+  { id: 1, email: 'user1@example.com' },
+  { id: 2, email: 'user2@example.com' },
+  { id: 3, email: 'user3@example.com' },
+  { id: 4, email: 'user4@example.com' },
+  { id: 5, email: 'user5@example.com' }
+];
+

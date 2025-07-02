@@ -1,7 +1,7 @@
 import { Modal, Input } from "antd";
 import { Formik } from "formik";
 import {PaystackButton } from 'react-paystack';
-import { dataType, ProductType } from "../../../shared/types";
+import { dataType, paystacksuccesresponse, ProductType } from "../../../shared/types";
 import { FlatButton } from "../../../shared/FlatButton";
 const styles={
     logo:{
@@ -9,6 +9,7 @@ const styles={
             height: '50px',
         },
 }
+
 type modaltype = {
     isOpen:boolean,
     selectedService:ProductType | null
@@ -29,7 +30,7 @@ type modaltype = {
     };
     publicKey: string;
     text: string;
-    onSuccess: () => void;
+    onSuccess: (response: paystacksuccesresponse) => Promise<void>;
     onClose: () => void;
 }
 

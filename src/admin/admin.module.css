@@ -1,0 +1,41 @@
+
+h3{
+    color: var(--color-darkblue);
+}
+/* admin admin admin */
+.scrollablediv{
+  padding: 15px;
+  height:200px;
+  overflow-y: auto;
+   box-shadow: 0 4px 6px -1px var(--color-darkblue);
+   border-radius: 15px;
+   margin-bottom: 20px;
+}
+.scrollablediv > div{
+    border-bottom: solid 1px var(--color-darkblue);
+    border-radius: 7px;
+    padding: 10px;
+}
+.scrollablediv::-webkit-scrollbar {
+  width: 6px;           
+}
+
+.scrollablediv::-webkit-scrollbar-track {
+  background: #f1f1f1;  
+}
+
+.scrollablediv::-webkit-scrollbar-thumb {
+  background-color: #999;   
+  border-radius: 15px;       
+  border: 1px solid transparent;
+}
+
+/* product list  */
+.productcontainer{
+  width:400px;
+  box-shadow: 0 4px 6px -1px var(--color-darkblue);
+  margin: 15px;
+  padding:30px;
+  border-radius: 15px;
+
+}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { productItems } from "../../data";
 import { FlatButton } from "../../shared/FlatButton";
-import { dataType, ProductType } from "../../shared/types";
+import { dataType, paystacksuccesresponse, ProductType } from "../../shared/types";
 import { ModalComponent } from "../homepage/component/ModalComponent";
 
 type props = {
@@ -22,10 +22,25 @@ const items = active === "All Products" ? productItems : productItems.filter(ite
 
 
     
+
  //handle finish on succesful payment
- const handleFinish = ()=>{
+ const handleFinish = async (response:paystacksuccesresponse)=>{
     // setLoading(true);
-    console.log('success')
+    const res = await fetch('http://localhost:5000/order/verify-payment/',{
+      method:'POST',
+      headers:{"Content-Type": "application/json"},
+      body:JSON.stringify({reference:response.reference})
+    });
+    const result = await res.json();
+    if(result.status === 'success'){
+      console.log('payment succesful');
+      alert('payment success')
+    }else{
+      console.log('verification failed')
+      alert('verification failed')
+    }
+
+ 
   }   
 //  const publicKey = process.env.REACT_APP_Pay_PublicKey!;
   const publicKey ='pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea';
@@ -57,21 +72,19 @@ const items = active === "All Products" ? productItems : productItems.filter(ite
       },
       {
         display_name: "Product / Service",
-        variable_name: "bookingType",
+        variable_name: "product",
         value: selectedService?.title
       },
       {
         display_name: "category",
-        variable_name: "service",
+        variable_name: "category",
         value: selectedService?.category
       }
     ]
   },
   publicKey,
   text: `Pay now ₦${selectedService?.price.toLocaleString()}`,
-  onSuccess: () => {
-    handleFinish();
-  },
+  onSuccess: handleFinish,
   onClose: () => {
     alert('You have closed the payment modal');
   }

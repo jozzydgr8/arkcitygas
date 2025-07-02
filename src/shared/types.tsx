@@ -13,3 +13,10 @@ export type ProductType = {
   image: string;
   category: string;
 };
+
+export type paystacksuccesresponse ={
+  reference:string;
+  transaction?:string,
+  status?:string,
+  message?:string
+}
