@@ -1,8 +1,11 @@
 import { Badge, Select } from "antd";
-import { orders } from "../../data";
 import { RightOutlined } from '@ant-design/icons';
 import Style from '../admin.module.css';
 import { useState } from "react";
+import { FlatButton } from "../../shared/FlatButton";
+import { OrderModal } from "../Modals/OrderModal";
+import { UseDataContext } from "../../context/UseDataContext";
+import { OrderType } from "../../shared/types";
 
 const { Option } = Select;
 
@@ -10,12 +13,29 @@ const statusMap: Record<string, "success" | "processing" | "default" | "error" |
   completed: 'success',
   pending: 'processing',
   shipped: 'default',
+  processing:'default',
+  success:'success'
 };
 
-export const ManageOrders = () => {
-  const [filterStatus, setFilterStatus] = useState("pending");
 
-  const filteredOrders = orders.filter(order => order.status === filterStatus);
+
+export const ManageOrders = () => {
+  const {orders} = UseDataContext();
+  const [filterStatus, setFilterStatus] = useState("pending");
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<OrderType | null>(null);
+
+  const filteredOrders = orders?.filter(order => order.orderStatus === filterStatus);
+
+  const handleOpenModal = (service:OrderType) => {
+          setSelectedService(service);
+          setIsOpen(true);
+        };
+      
+        const handleCloseModal = () => {
+          setIsOpen(false);
+          setSelectedService(null);
+        };
 
   return (
     <section>
@@ -31,26 +51,36 @@ export const ManageOrders = () => {
             style={{ width: 200 }}
           >
             <Option value="pending">Pending</Option>
-            <Option value="completed">Completed</Option>
+            <Option value="processing">processing</Option>
             <Option value="shipped">Shipped</Option>
+            <Option value="completed">Completed</Option>
+            
           </Select>
         </div>
 
         {/* Order List */}
         <div>
-          {filteredOrders.map(order => (
-            <div key={order.id} className={Style.ordercontainer}>
+          {filteredOrders?.map(order => (
+            <div key={order._id} className={Style.ordercontainer}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: 'space-between' }}>
                 <div>
                   <strong>Order By</strong>: {order.name}<br />
-                  <small>OrderId: {order.id}</small><br />
-                  {order.status} <Badge status={statusMap[order.status] || 'default'} />
+                  <small>OrderId: {order._id}</small><br />
+                  Order Status: {order.orderStatus} <Badge status={statusMap[order.orderStatus] || 'default'} /><br/>
+                  Payment Status: {order.status} <Badge status={statusMap[order.status] || 'default'} />
+                  
                 </div>
-                <RightOutlined />
+                
+                <FlatButton icon={<RightOutlined />} onClick={() => handleOpenModal(order)}/>
               </div>
             </div>
           ))}
         </div>
+
+        <OrderModal
+        isOpen={isOpen}
+        selectedService={selectedService}
+        handleCloseModal={handleCloseModal}/>
       </div>
     </section>
   );

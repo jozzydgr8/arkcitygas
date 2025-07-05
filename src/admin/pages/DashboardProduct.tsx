@@ -1,11 +1,13 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { ProductList } from "../component/ProductList"
-import { productItems } from "../../data";
-import {EditOutlined} from '@ant-design/icons'
+import { Popconfirm } from "antd";
+import {DeleteOutlined, EditOutlined} from '@ant-design/icons'
 import Style from '../admin.module.css'
 import { FlatButton } from "../../shared/FlatButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UpdateProduct } from "../Modals/UpdateProduct";
+import { UseDataContext } from "../../context/UseDataContext";
+import { ProductHooks } from "../Hooks/ProductHooks";
 
 const styles = {
     backgroundImage:{
@@ -18,7 +20,15 @@ const styles = {
 export const DashboardProduct = ()=>{
     const [isOpen, setIsOpen] = useState(false);
     const {id} = useParams();
-    const data = productItems.find(product=>product.id.toString().toLocaleLowerCase() === id?.toLocaleLowerCase());
+    const {product} = UseDataContext();
+    const {deleteProduct} = ProductHooks();
+    const navigate = useNavigate();
+    const data = product?.find(product=>product._id.toString().toLocaleLowerCase() === id?.toLocaleLowerCase());
+   useEffect(() => {
+    if (!data) {
+        navigate('/admin_jctbdil1$');
+    }
+}, [data, navigate]);
 
     const handleCloseModal = () => {
         setIsOpen(false);
@@ -34,7 +44,7 @@ export const DashboardProduct = ()=>{
                        
                         <div>
                             <FlatButton onClick={()=>setIsOpen(true)} icon={<EditOutlined/>}/>
-                            <div style={{backgroundImage:`url(${data?.image})`, ...styles.backgroundImage}}></div>
+                            <div style={{backgroundImage:`url(${data?.imagePath})`, ...styles.backgroundImage}}></div>
                          
                         </div>
                         {/* //texts descriptions */}
@@ -46,17 +56,37 @@ export const DashboardProduct = ()=>{
 
                         <p>{data?.description} <FlatButton onClick={()=>setIsOpen(true)} icon={<EditOutlined/>}/></p>
 
-                        <p>{data?.price} <FlatButton onClick={()=>setIsOpen(true)} icon={<EditOutlined/>}/></p>
+                        <p>₦{data?.cost} <FlatButton onClick={()=>setIsOpen(true)} icon={<EditOutlined/>}/></p>
+
+                        <div>
+                           <Popconfirm
+                            title="Are you sure to delete this product?"
+                            description="This action cannot be undone."
+                            onConfirm={() => deleteProduct(data?._id!)}
+                            okText="Yes, delete"
+                            cancelText="Cancel"
+                            >
+                            <span>
+                                <FlatButton
+                                className="btndark"
+                                title="Delete Product"
+                                icon={<DeleteOutlined />}
+                            />
+                            </span>
+                            </Popconfirm>
+
+                        </div>
                         </>
                     }
                 </div>
                 <ProductList/>
                 <UpdateProduct isOpen={isOpen} handleCloseModal={handleCloseModal} 
                 title={data?.title!} 
-                price={data?.price!} 
+                cost={data?.cost!} 
+                _id={data?._id!}
                 description={data?.description!}
                 category={data?.category!}
-                image={data?.image!}/>
+                imagePath={data?.imagePath!}/>
             </div>
         </section>
     )

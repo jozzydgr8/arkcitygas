@@ -1,32 +1,45 @@
 import type { UploadFile } from "antd/es/upload/interface";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { UseDataContext } from "../../context/UseDataContext";
+
 type values = {
     title: string;
     category: string;
     description: string;
-    price: string;
+    cost: string;
     image: string;
     size: string;
 
 }
 
 type postProduct = {
-    values:values,fileList: UploadFile<any>[], setFileList: (value: React.SetStateAction<UploadFile<any>[]>) => void
+    values:values,fileList: UploadFile<any>[],resetForm:()=>void, setLoading:React.Dispatch<React.SetStateAction<boolean>>, setFileList: (value: React.SetStateAction<UploadFile<any>[]> ) => void
 }
 
 export const ProductHooks = ()=>{
-    const postProduct = async ({values,fileList, setFileList}:postProduct) => {
+    const {dispatch} = UseDataContext();
+    const navigate = useNavigate();
+    const postProduct = async ({values,fileList, setFileList, setLoading, resetForm}:postProduct) => {
             if (!fileList.length) {
               return alert("Please upload an image.");
             }
-
+            setLoading(true);
             const formData = new FormData();
             formData.append("title", values.title);
             formData.append("description", values.description);
-            formData.append("cost", values.price); // match backend field
-            values.size != ''&& formData.append("size", values?.size);
+            formData.append("cost", values.cost); 
+            formData.append("category", values.category)
+            if (values.size.trim() !== '') {
+                const parsedSize = parseFloat(values.size);
+                if (!isNaN(parsedSize)) {
+                    formData.append("size", parsedSize.toString());
+                }
+                }
             formData.append("image", fileList[0].originFileObj as File);
 
             try {
+                    
                     const res = await fetch("http://localhost:5000/product", {
                         method: "POST",
                         body: formData, // FormData object
@@ -40,13 +53,94 @@ export const ProductHooks = ()=>{
                     console.log("Product added:", data);
                     // resetForm();
                     setFileList([]);
-                    alert("Product uploaded successfully!");
+                    resetForm();
+                    toast.success("Product uploaded successfully!");
+                    setLoading(false)
                 } catch (error) {
                 console.error("Upload failed:", error);
-                alert("Upload failed");
+                toast.error("Upload failed");
+                
+                }finally{
+                    setLoading(false)
                 }
 
           }
+    
+    const deleteProduct = async(_id:string)=>{
+        try{
+            const response = await fetch(`http://localhost:5000/product/${_id}`,{
+                method:'delete'
+            })
+            const json = await response.json();
+            console.log('delete succesful', json);
+            toast.success('product delete successful');
+            dispatch({type:"deleteProduct", payload:_id});
+        }catch(error){
+            console.error(error)
+            toast.error('error deleting documents')
+        }finally{
+            navigate('/admin_jctbdil1$')
+        }
+    }
 
-          return{postProduct}
+    //updateproduct
+    const productUpdate = async ({setLoading,values, fileList, title, description, cost, category,_id, handleCloseModal}:updateprops) => {
+    setLoading(true);
+    const formData = new FormData();
+    const originalValues = { title, category, description, cost }; // from props
+
+    // Only add changed text fields
+    const keys: (keyof typeof originalValues)[] = ['title', 'category', 'description', 'cost'];
+
+    for (const key of keys) {
+    if (values[key] != null && values[key] !== originalValues[key]) {
+        formData.append(key, values[key]);
+    }
+    }
+
+
+    // Only add image if it was changed
+    if (fileList.length > 0 && fileList[0].originFileObj) {
+        formData.append("image", fileList[0].originFileObj as File);
+    }
+
+    if (!formData.has('image') && formData.keys().next().done) {
+        // No changes
+        console.log("No changes to submit.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5000/product/${_id}`, {
+            method: "PATCH",
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to update product");
+        }
+
+        const updatedProduct = await response.json();
+        dispatch({type:'updateProduct', payload:updatedProduct})
+        console.log("Product updated:", updatedProduct);
+        toast.success('product update succesfully')
+    } catch (error) {
+        console.error("Error updating product:", error);
+        toast.error('error updating document');
+    }finally{
+        setLoading(false);
+    }
+};
+
+
+          return{postProduct, deleteProduct, productUpdate}
+}
+
+type updateprops={
+    values:any,
+    fileList:UploadFile[],
+    title:string, description:string, cost:number, category:string,
+    _id:string,
+    handleCloseModal:()=>void,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }

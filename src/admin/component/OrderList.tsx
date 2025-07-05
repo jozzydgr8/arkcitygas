@@ -1,18 +1,19 @@
-import { orders } from "../../data"
 import styles from '../admin.module.css'
 import { FlatButton } from "../../shared/FlatButton"
 import { NavLink } from "react-router-dom"
+import { UseDataContext } from "../../context/UseDataContext"
 export const OrderList = ()=>{
+    const {orders} = UseDataContext();
     return(
        
             <>
                 <h3>Recent Orders</h3>
                 <div className={styles.scrollablediv}>
                 {
-                    orders.map(order=>(
-                        <div key={order.id}>
+                    orders?.map(order=>(
+                        <div key={order._id}>
                             <strong>{order.name}</strong><br/>
-                            <small>OrderId: {order.id}</small>
+                            <small>OrderId: {order._id}</small>
                         </div>
                     ))
                 }

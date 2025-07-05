@@ -1,26 +1,30 @@
-import { Form, Input, Modal, Upload, UploadFile } from "antd"
+import { Form, Input, Modal, Popconfirm, Upload, UploadFile } from "antd"
 import { Formik } from "formik"
 import { FlatButton } from "../../shared/FlatButton"
 import { DeleteOutlined, UploadOutlined } from '@ant-design/icons'
 import { useState } from "react"
+import { ProductHooks } from "../Hooks/ProductHooks"
 
 type modalType = {
     isOpen: boolean,
     handleCloseModal: () => void,
     title: string,
     description: string,
-    price: number,
+    cost: number,
     category: string,
-    image: string,
+    imagePath: string,
+    _id:string,
 }
 
-export const UpdateProduct = ({ isOpen, handleCloseModal, title, description, price, category, image }: modalType) => {
-    const [fileList, setFileList] = useState<UploadFile[]>(image ? [{
+export const UpdateProduct = ({ isOpen, handleCloseModal, title, description, cost, category, imagePath, _id }: modalType) => {
+    const [fileList, setFileList] = useState<UploadFile[]>(imagePath ? [{
         uid: '-1',
         name: 'current_image.png',
         status: 'done',
-        url: image,
-    }] : [])
+        url: imagePath,
+    }] : []);
+    const [loading, setLoading] = useState(false);
+    const{productUpdate, deleteProduct} = ProductHooks();
 
     return (
         <Modal
@@ -34,11 +38,11 @@ export const UpdateProduct = ({ isOpen, handleCloseModal, title, description, pr
                     title,
                     category,
                     description,
-                    price,
-                    image: '',
+                    cost,
+                    imagePath: '',
                 }}
                 onSubmit={(values) => {
-                    console.log({ ...values, image: fileList });
+                    console.log({ ...values, imagePath: fileList });
                 }}
             >
                 {(formik) => (
@@ -67,11 +71,11 @@ export const UpdateProduct = ({ isOpen, handleCloseModal, title, description, pr
                             />
                         </Form.Item>
 
-                        <Form.Item label="Price">
+                        <Form.Item label="Cost">
                             <Input
-                                name="price"
+                                name="cost"
                                 type="number"
-                                value={formik.values.price}
+                                value={formik.values.cost}
                                 onChange={formik.handleChange}
                             />
                         </Form.Item>
@@ -82,14 +86,14 @@ export const UpdateProduct = ({ isOpen, handleCloseModal, title, description, pr
                                 fileList={fileList}
                                 beforeUpload={() => false} // prevent auto upload
                                 onChange={({ fileList }) => {
-                                    // Keep only the latest image
+                                    // Keep only the latest imagePath
                                     const latestFile = fileList.slice(-1)
                                     setFileList(latestFile)
-                                    formik.setFieldValue("image", latestFile[0])
+                                    formik.setFieldValue("imagePath", latestFile[0])
                                 }}
                                 onRemove={() => {
                                     setFileList([])
-                                    formik.setFieldValue("image", '')
+                                    formik.setFieldValue("imagePath", '')
                                 }}
                             >
                                 <FlatButton title="Upload Image" icon={<UploadOutlined />} />
@@ -99,15 +103,25 @@ export const UpdateProduct = ({ isOpen, handleCloseModal, title, description, pr
                         <div style={{ display: 'flex', gap: '1rem' }}>
                             <FlatButton
                                 title="Update"
+                                disabled={loading}
                                 className="btndark"
-                                // htmlType="submit"
+                                onClick={()=>productUpdate({setLoading,values:formik.values, fileList, title, description, cost, category,_id, handleCloseModal})}
                             />
-                            <FlatButton
-                                title="Delete"
-                                className="btnlight"
+                            <Popconfirm
+                            title="Are you sure to delete this product?"
+                            description="This action cannot be undone."
+                            onConfirm={() => deleteProduct(_id)}
+                            okText="Yes, delete"
+                            cancelText="Cancel"
+                            >
+                            <span>
+                                <FlatButton
+                                className="btndark"
+                                title="Delete Product"
                                 icon={<DeleteOutlined />}
-                                onClick={() => console.log('Delete clicked')}
                             />
+                            </span>
+                            </Popconfirm>
                         </div>
                     </Form>
                 )}

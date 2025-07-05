@@ -1,13 +1,14 @@
-import { Button, Form, Input, Upload } from "antd"
+import { Button, Form, Input, Upload, Select } from "antd"
 import { Formik } from "formik"
 import { FlatButton } from "../../shared/FlatButton";
 import { useState } from "react";
 import {UploadOutlined} from '@ant-design/icons';
 import type { UploadFile } from "antd/es/upload/interface";
 import { ProductHooks } from "../Hooks/ProductHooks";
-
+import * as Yup from 'yup'
 export const AddProduct = ()=>{
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [loading, setLoading] = useState(false);
   const {postProduct} = ProductHooks();
 
   const beforeUpload = () => false;
@@ -15,21 +16,24 @@ export const AddProduct = ()=>{
   const handleFileChange = ({ fileList }: { fileList: UploadFile[] }) => {
     setFileList(fileList);
   };
+
+  const validationSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required"),
+  category: Yup.string().required("Category is required"),
+  description: Yup.string().required("Description is required"),
+  cost: Yup.number().required("Cost is required"),
+});
     return(
         <section>
             <div className="container-fluid">
                 <h2>Add New Product</h2>
                 <Formik
                 initialValues={{
-                    title:'',
-                    category:"",
-                    description:"",
-                    price:'',
-                    image: '',
-                    size:"",
+                    title:'',category:"",description:"",cost:'',image: '',size:"",
                 }}
-            onSubmit={(values)=>postProduct({values, setFileList, fileList})}
-            >
+                validationSchema={validationSchema}
+                onSubmit={(values, {resetForm})=>postProduct({values, setFileList, fileList, setLoading, resetForm})}
+                >
                 {(formik) => (
                     <Form layout="vertical" onFinish={formik.handleSubmit}>
                         <Form.Item label="Title">
@@ -41,13 +45,23 @@ export const AddProduct = ()=>{
                             />
                         </Form.Item>
 
-                        <Form.Item label="Category">
-                            <Input
-                                name="category"
-                                value={formik.values.category}
-                                onChange={formik.handleChange}
-                                required
-                            />
+                        <Form.Item label=" Select Category"
+                        rules={[
+                                {
+                                required: true,
+                                message: 'Please choose a category',
+                                },
+                            ]}>
+                        <Select
+                            title="category"
+                            value={formik.values.category}
+                            onChange={(value) => formik.setFieldValue("category", value)}
+                            placeholder="Select a category"
+                        >
+                            <Select.Option value="accessories">Accessories</Select.Option>
+                            <Select.Option value="cylinders">Cylinders</Select.Option>
+                            <Select.Option value="refill">Refill</Select.Option>
+                        </Select>
                         </Form.Item>
 
                         <Form.Item label="Description">
@@ -55,15 +69,16 @@ export const AddProduct = ()=>{
                                 name="description"
                                 value={formik.values.description}
                                 onChange={formik.handleChange}
+                                
                                 required
                             />
                         </Form.Item>
 
-                        <Form.Item label="Price">
+                        <Form.Item label="cost">
                             <Input
-                                name="price"
+                                name="cost"
                                 type="number"
-                                value={formik.values.price}
+                                value={formik.values.cost}
                                 onChange={formik.handleChange}
                                 required
                             />
@@ -105,7 +120,7 @@ export const AddProduct = ()=>{
                             <FlatButton
                                 title="Add Product"
                                 className="btndark"
-                                // htmlType="submit"
+                                disabled={loading}
                             />
                             
                         </div>

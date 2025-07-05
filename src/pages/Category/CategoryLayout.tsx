@@ -4,6 +4,7 @@ import { productItems } from "../../data";
 import { FlatButton } from "../../shared/FlatButton";
 import { dataType, paystacksuccesresponse, ProductType } from "../../shared/types";
 import { ModalComponent } from "../homepage/component/ModalComponent";
+import { UseDataContext } from "../../context/UseDataContext";
 
 type props = {
   active:string
@@ -14,8 +15,9 @@ const [isOpen, setIsOpen] = useState(false);
 const [selectedService, setSelectedService] = useState<ProductType | null>(null);
 const [proceedPayment, setProceedPayment] =useState(false);
 const [loading, setLoading] = useState(false);
+const {product} = UseDataContext();
 //get categories
-const items = active === "All Products" ? productItems : productItems.filter(item => item.category.toString() === active);
+const items = active === "All Products" ? product : product && product.filter(item => item.category.toString() === active);
 
 //useffect to fetch categories
 
@@ -47,7 +49,7 @@ const items = active === "All Products" ? productItems : productItems.filter(ite
 
    const componentProp = {
   email: dataSubmit.email,
-  amount: selectedService?.price! * 100,
+  amount: selectedService?.cost! * 100,
   metadata: {
     custom_fields: [
       {
@@ -83,7 +85,7 @@ const items = active === "All Products" ? productItems : productItems.filter(ite
     ]
   },
   publicKey,
-  text: `Pay now ₦${selectedService?.price.toLocaleString()}`,
+  text: `Pay now ₦${selectedService?.cost.toLocaleString()}`,
   onSuccess: handleFinish,
   onClose: () => {
     alert('You have closed the payment modal');
@@ -106,10 +108,10 @@ const items = active === "All Products" ? productItems : productItems.filter(ite
                 <h2>{active}</h2>
                 <div className="servicegrid">
 {
-                    items.map(product=>(
+                    items?.map(product=>(
                 <div
             
-                    key={product.id}
+                    key={product._id}
                     className="servicegridcontent animate-up"
                     style={{
                         border: "solid 1px #d7d9d6",
@@ -125,7 +127,7 @@ const items = active === "All Products" ? productItems : productItems.filter(ite
                     {/* Top image section */}
                     <div
                         style={{
-                        backgroundImage: `url(${product.image})`,
+                        backgroundImage: `url(${product.imagePath})`,
                         height: "200px",
                         backgroundSize: "cover",
                         backgroundPosition: "center center",
@@ -153,7 +155,7 @@ const items = active === "All Products" ? productItems : productItems.filter(ite
                         <FlatButton
                             className="btndark"
                             onClick={() => handleOpenModal(product)}
-                            title={`BUY NOW - ₦${product.price}`}
+                            title={`BUY NOW - ₦${product.cost}`}
                         />
                         </div>
                     </div>

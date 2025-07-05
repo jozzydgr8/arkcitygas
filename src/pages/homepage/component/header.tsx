@@ -13,7 +13,7 @@ const styles = {
         backgroundImage:`url(${gasbackground})`,
         backgroundSize:'cover',
         backgroundPosition:'center center',
-        color:'white',
+        color:`white`,
         minHeight:'80vh'
     }
 }

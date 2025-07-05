@@ -6,12 +6,13 @@ export type dataType = {
 }
 
 export type ProductType = {
-  id: number;
+  _id: string;
   title: string;
   description: string;
-  price: number;
-  image: string;
+  cost: number;
+  imagePath:string;
   category: string;
+  size?:number
 };
 
 export type paystacksuccesresponse ={
@@ -19,4 +20,16 @@ export type paystacksuccesresponse ={
   transaction?:string,
   status?:string,
   message?:string
+}
+
+export type OrderType = {
+  status:string,
+  name:string,
+  _id:string,
+  email:string,
+  reference:string
+  amount?:number,
+  address?:string,
+  phone?:string,
+  orderStatus:string,
 }

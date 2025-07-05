@@ -45,16 +45,16 @@ nav .container-fluid{
   margin:2px
 }
 .btndark, .btndark:hover{
-  background-color: var(--color-darkblue);
-  color: white;
+  background-color: var(--color-darkblue) !important;
+  color: white !important;
 }
 .btnalternate,.btnalternate:hover{
-  background-color: var(--color-lightblue);
-  color: white;
+  background-color: var(--color-lightblue) !important;
+  color: white !important;
 }
 .btnlight, .btnlight:hover{
-  border: solid 1px var(--color-darkblue);
-  color: var(--color-darkblue);
+  border: solid 1px var(--color-darkblue) !important;
+  color: var(--color-darkblue) !important;
 
 }
 .nav-link{
