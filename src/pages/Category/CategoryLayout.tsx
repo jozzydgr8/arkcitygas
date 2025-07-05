@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { productItems } from "../../data";
+import { useState } from "react";
 import { FlatButton } from "../../shared/FlatButton";
 import { dataType, paystacksuccesresponse, ProductType } from "../../shared/types";
 import { ModalComponent } from "../homepage/component/ModalComponent";

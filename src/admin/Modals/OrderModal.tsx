@@ -86,9 +86,9 @@ export const OrderModal = ({ selectedService, isOpen, handleCloseModal }:modalty
       </Descriptions>
 
       <div>
-        {orderStatus == 'pending' &&<FlatButton disabled={loading} title='Process Order' className='btndark' onClick={()=>updateOrderStatus(_id,'processing',setLoading)}/>}
-        {orderStatus == 'shipped' && <FlatButton disabled={loading} title='Order Complete' className='btnlight' onClick={()=>updateOrderStatus(_id, 'complete',setLoading)}/>}
-        {orderStatus =='processing' && <FlatButton disabled={loading} title='Ship Order' className='btnlight' onClick={()=>updateOrderStatus(_id, 'shipped',setLoading)}/>}
+        {orderStatus == 'pending' &&<FlatButton disabled={loading} title='Process Order' className='btndark' onClick={()=>{updateOrderStatus(_id,'processing',setLoading);handleCloseModal()}}/>}
+        {orderStatus == 'shipped' && <FlatButton disabled={loading} title='Order Complete' className='btnlight' onClick={()=>{updateOrderStatus(_id, 'complete',setLoading);handleCloseModal()}}/>}
+        {orderStatus =='processing' && <FlatButton disabled={loading} title='Ship Order' className='btnlight' onClick={()=>{updateOrderStatus(_id, 'shipped',setLoading);handleCloseModal()}}/>}
       </div>
     </Modal>
   );

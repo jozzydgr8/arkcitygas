@@ -1,9 +1,15 @@
-import { useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+
+import { NavLink, useNavigate } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
-import { Offcanvas } from "bootstrap"; 
+import { useState } from "react";
+import { UseDataContext } from "../context/UseDataContext";
+import { FlatButton } from "./FlatButton";
+
 
 export const OffcanvasNavbar = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const {dispatch} = UseDataContext();
+  const navigate = useNavigate()
   const handleNavLinkClick = () => {
   const dismissButton = document.querySelector(
     '#offcanvasNavbar [data-bs-dismiss="offcanvas"]'
@@ -104,16 +110,23 @@ export const OffcanvasNavbar = () => {
                 </ul>
               </li>
             </ul>
+          
             <form className="d-flex mt-3" role="search">
+              
               <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search"
+                placeholder="Search for Orders Using OrderId "
                 aria-label="Search"
+                onChange={(e)=>setSearchQuery(e.target.value)}
               />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
+              <button className="btn btn-outline-success" title="search" onClick={(e)=>{
+                e.preventDefault();
+                dispatch({type:'searchQuery', payload:searchQuery});
+                navigate('/admin_jctbdil1$/manageorders');
+                handleNavLinkClick();
+              }}>Submit</button>
+               
             </form>
           </div>
         </div>

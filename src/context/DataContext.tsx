@@ -13,6 +13,7 @@ type stateProps = {
   product: ProductType[] | null;
   loading: boolean;
   orders: OrderType[] | null;
+  searchQuery:string | null;
 };
 
 type productProps = {
@@ -42,13 +43,18 @@ type updateOrderProps = {
   type: "updateOrder";
   payload: OrderType;
 };
+type searchProps = {
+  type:'searchQuery';
+  payload:string | null
+}
 
-type actionProps = productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps;
+type actionProps = productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps;
 
 const initialState: stateProps = {
   product: null,
   loading: false,
   orders: null,
+  searchQuery: null,
 };
 
 export const Context = createContext({} as valueProps);
@@ -61,6 +67,8 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
       return { ...state, loading: action.payload };
     case "getOrders":
       return { ...state, orders: action.payload };
+    case "searchQuery":
+      return {...state, searchQuery:action.payload}
     case "deleteProduct":
       return {
         ...state,

@@ -20,12 +20,22 @@ const statusMap: Record<string, "success" | "processing" | "default" | "error" |
 
 
 export const ManageOrders = () => {
-  const {orders} = UseDataContext();
+  const {orders, searchQuery, dispatch} = UseDataContext();
   const [filterStatus, setFilterStatus] = useState("pending");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<OrderType | null>(null);
 
-  const filteredOrders = orders?.filter(order => order.orderStatus === filterStatus);
+const normalizedSearchQuery = searchQuery?.trim().toLowerCase();
+
+const isSearching = !!normalizedSearchQuery;
+
+const filteredOrders = orders?.filter(order => {
+  if (isSearching) {
+    return order._id?.toString().toLowerCase() == normalizedSearchQuery;
+  }
+  return order.orderStatus === filterStatus;
+});
+
 
   const handleOpenModal = (service:OrderType) => {
           setSelectedService(service);
@@ -41,33 +51,36 @@ export const ManageOrders = () => {
     <section>
       <div className="container-fluid">
         <h2>Manage Orders</h2>
+        {isSearching && <h4 style={{textAlign:"center"}}>Order search for OrderId: {searchQuery}</h4>}
 
         {/* Dropdown filter */}
         <div style={{ marginBottom: '16px' }}>
         <h3>View Order</h3>
-          <Select 
-            defaultValue="pending" 
-            onChange={value => setFilterStatus(value)} 
-            style={{ width: 200 }}
-          >
-            <Option value="pending">Pending</Option>
-            <Option value="processing">processing</Option>
-            <Option value="shipped">Shipped</Option>
-            <Option value="completed">Completed</Option>
-            
-          </Select>
+          {!isSearching && (
+            <Select
+              value={filterStatus}
+              onChange={value => setFilterStatus(value)}
+              style={{ width: 200 }}
+            >
+              <Option value="pending">Pending</Option>
+              <Option value="processing">Processing</Option>
+              <Option value="shipped">Shipped</Option>
+              <Option value="complete">Completed</Option>
+            </Select>
+          )}
         </div>
 
         {/* Order List */}
         <div>
           {filteredOrders?.map(order => (
+            
             <div key={order._id} className={Style.ordercontainer}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: 'space-between' }}>
                 <div>
                   <strong>Order By</strong>: {order.name}<br />
-                  <small>OrderId: {order._id}</small><br />
-                  Order Status: {order.orderStatus} <Badge status={statusMap[order.orderStatus] || 'default'} /><br/>
-                  Payment Status: {order.status} <Badge status={statusMap[order.status] || 'default'} />
+                  <strong>OrderId:</strong>: {order._id}<br />
+                  <strong>Order Status: </strong>{order.orderStatus} <Badge status={statusMap[order.orderStatus] || 'default'} /><br/>
+                  <strong>Payment Status: </strong>{order.status} <Badge status={statusMap[order.status] || 'default'} />
                   
                 </div>
                 
@@ -75,12 +88,36 @@ export const ManageOrders = () => {
               </div>
             </div>
           ))}
+
+          {filteredOrders?.length === 0 && (
+            <p style={{ textAlign: 'center', marginTop: '20px' }}>
+              {isSearching ? "No such order found." : "No orders in this category."}
+            </p>
+          )}
         </div>
+
+
+
+
+
+
+
+
+
+
 
         <OrderModal
         isOpen={isOpen}
         selectedService={selectedService}
         handleCloseModal={handleCloseModal}/>
+        {isSearching && (
+        <FlatButton className="btndark"  title='clear search'onClick={() => {
+          dispatch({type:'searchQuery', payload:null})
+        }}/>
+         
+       
+      )}
+
       </div>
     </section>
   );

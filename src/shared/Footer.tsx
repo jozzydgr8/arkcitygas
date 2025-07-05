@@ -4,7 +4,8 @@ import { InstagramOutlined, FacebookOutlined, LinkedinOutlined } from '@ant-desi
 import { Link } from 'react-router-dom';
 import { FlatButton } from './FlatButton';
 import { useState } from 'react';
-import { productItems, serviceValues } from '../data';
+import {  serviceValues } from '../data';
+import { UseDataContext } from '../context/UseDataContext';
 
 
 const { Title, Paragraph } = Typography;
@@ -12,6 +13,7 @@ const { Title, Paragraph } = Typography;
 function Footer() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const {product} = UseDataContext()
 
   
 
@@ -68,7 +70,7 @@ function Footer() {
           <Col lg={4} md={12} sm={24}>
             <Title level={4} style={{ color: '#fff' }}>Products</Title>
             <Row gutter={[0, 12]}>
-              {productItems.filter((item)=>item.category.toLocaleLowerCase() =='refills').map((link, idx) => (
+              {product?.filter((item)=>item.category.toLocaleLowerCase() =='refills').map((link, idx) => (
                 <Col span={24} key={idx}>
                   <Link to={'/'} style={{ color: '#ccc' }}>{link.title}</Link>
                 </Col>

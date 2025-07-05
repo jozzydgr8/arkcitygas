@@ -78,56 +78,7 @@ export const serviceValues = [
 
 
 
-export const productItems = [
-  {
-    id: 1,
-    title: "12.5kg Gas Cylinder",
-    description: "Standard 12.5kg LPG cylinder, perfect for home cooking needs.",
-    price: 18000,
-    image: demoImage,
-    category: "Refills"
-  },
-  {
-    id: 2,
-    title: "6kg Cylinder Exchange",
-    description: "Quick 6kg cylinder exchange with safety-checked prefilled gas.",
-    price: 9000,
-    image: demoImage,
-    category: "Refills"
-  },
-  {
-    id: 3,
-    title: "Brand New 6kg Cylinder",
-    description: "Purchase a brand new 6kg LPG cylinder with safety valve.",
-    price: 16000,
-    image: demoImage,
-    category: "cylinders"
-  },
-  {
-    id: 4,
-    title: "Regulator + Hose Kit",
-    description: "Complete LPG connection kit including regulator and 1.5m hose.",
-    price: 3500,
-    image: demoImage,
-    category: "accessories"
-  },
-  {
-    id: 5,
-    title: "Gas Home Delivery (12.5kg)",
-    description: "Get your 12.5kg LPG cylinder delivered straight to your doorstep.",
-    price: 19000,
-    image: demoImage,
-    category: "Gas Delivery Service"
-  },
-  {
-    id: 6,
-    title: "Bulk Supply - 50 Cylinders",
-    description: "Bulk delivery of 50 LPG cylinders for commercial needs.",
-    price: 850000,
-    image: demoImage,
-    category: "Bulk/Wholesale Supply"
-  }
-];
+
 
 export const adItems = [
   {
@@ -239,25 +190,12 @@ export const reviews = [
 
 
 //admon  test test
-export const orders = [
-  { id: 'ORD001', name: 'John Doe', status: 'completed' },
-  { id: 'ORD002', name: 'Jane Smith', status: 'pending' },
-  { id: 'ORD003', name: 'Michael Johnson', status: 'shipped' },
-  { id: 'ORD004', name: 'Emily Davis', status: 'completed' },
-  { id: 'ORD005', name: 'Chris Lee', status: 'pending' },
-  { id: 'ORD006', name: 'Sarah Wilson', status: 'shipped' },
-  { id: 'ORD007', name: 'David Martinez', status: 'completed' },
-  { id: 'ORD008', name: 'Laura Brown', status: 'pending' },
-  { id: 'ORD009', name: 'Daniel Anderson', status: 'shipped' },
-  { id: 'ORD010', name: 'Jessica Thompson', status: 'completed' },
-];
+
 
 
 export const subscribers = [
-  { id: 1, email: 'user1@example.com' },
-  { id: 2, email: 'user2@example.com' },
-  { id: 3, email: 'user3@example.com' },
-  { id: 4, email: 'user4@example.com' },
-  { id: 5, email: 'user5@example.com' }
+  { id: 1, email: 'jozzydgreat1@gmail.com' },
+  { id: 2, email: 'jozzydgr8@gmail.com' },
+  { id: 3, email: 'jozzydgreat2@gmail.com' },
 ];
 
