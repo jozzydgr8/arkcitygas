@@ -33,3 +33,10 @@ export type OrderType = {
   phone?:string,
   orderStatus:string,
 }
+
+export type User = {
+    _id?:string,
+    email:string,
+    token?:string,
+    admin?:true
+}

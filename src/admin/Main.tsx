@@ -5,9 +5,9 @@ export const Main = ()=>{
     return(
         <>
         <OffcanvasNavbar/>
-        <div style={{marginTop:"90px"}}>
+        
             <Outlet/>
-        </div>
+        
         </>
     )
 }

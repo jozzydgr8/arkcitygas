@@ -2,6 +2,7 @@ import type { UploadFile } from "antd/es/upload/interface";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UseDataContext } from "../../context/UseDataContext";
+import { UseAuthContext } from "../../context/UseAuthContext";
 
 type values = {
     title: string;
@@ -19,6 +20,7 @@ type postProduct = {
 
 export const ProductHooks = ()=>{
     const {dispatch} = UseDataContext();
+    const {user} = UseAuthContext();
     const navigate = useNavigate();
     const postProduct = async ({values,fileList, setFileList, setLoading, resetForm}:postProduct) => {
             if (!fileList.length) {
@@ -30,18 +32,19 @@ export const ProductHooks = ()=>{
             formData.append("description", values.description);
             formData.append("cost", values.cost); 
             formData.append("category", values.category)
-            if (values.size.trim() !== '') {
-                const parsedSize = parseFloat(values.size);
-                if (!isNaN(parsedSize)) {
-                    formData.append("size", parsedSize.toString());
-                }
-                }
+            if (values.size !== '' && values.size !== null && !isNaN(Number(values.size))) {
+            formData.append("size", Number(values.size).toString());
+            }
+
             formData.append("image", fileList[0].originFileObj as File);
 
             try {
                     
                     const res = await fetch("http://localhost:5000/product", {
                         method: "POST",
+                        headers:{
+                            'Authorization': `Bearer ${user?.token}`,
+                        },
                         body: formData, // FormData object
                     });
 
@@ -51,6 +54,7 @@ export const ProductHooks = ()=>{
 
                     const data = await res.json();
                     console.log("Product added:", data);
+                    dispatch({type:'addproduct', payload:data});
                     // resetForm();
                     setFileList([]);
                     resetForm();
@@ -69,8 +73,14 @@ export const ProductHooks = ()=>{
     const deleteProduct = async(_id:string)=>{
         try{
             const response = await fetch(`http://localhost:5000/product/${_id}`,{
-                method:'delete'
+                method:'delete',
+                headers:{
+                    'Authorization': `Bearer ${user?.token}`,
+                }
             })
+            if(!response.ok){
+                throw Error('error deleting product')
+            }
             const json = await response.json();
             console.log('delete succesful', json);
             toast.success('product delete successful');
@@ -113,6 +123,9 @@ export const ProductHooks = ()=>{
     try {
         const response = await fetch(`http://localhost:5000/product/${_id}`, {
             method: "PATCH",
+            headers:{
+                'Authorization': `Bearer ${user?.token}`,
+            },
             body: formData,
         });
 
@@ -123,7 +136,8 @@ export const ProductHooks = ()=>{
         const updatedProduct = await response.json();
         dispatch({type:'updateProduct', payload:updatedProduct})
         console.log("Product updated:", updatedProduct);
-        toast.success('product update succesfully')
+        toast.success('product update succesfully');
+        handleCloseModal();
     } catch (error) {
         console.error("Error updating product:", error);
         toast.error('error updating document');

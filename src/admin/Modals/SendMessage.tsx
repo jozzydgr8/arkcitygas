@@ -31,6 +31,9 @@ export const SendMessage = ({ selectedEmail, isModalOpen, setIsModalOpen }: prop
         
 
       });
+      if(!response.ok){
+        throw Error('an error occured')
+      }
       toast.success('Email sent Succesfully!');
     }catch(error){
       console.error(error);

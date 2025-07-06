@@ -6,23 +6,33 @@ import { DashboardProduct } from './admin/pages/DashboardProduct';
 import { AddProduct } from './admin/pages/AddProduct';
 import { ManageOrders } from './admin/pages/ManageOrders';
 import { ToastContainer } from 'react-toastify';
-
 import { useEffect } from 'react';
 import { UseDataContext } from './context/UseDataContext';
+import Session from './admin/pages/Session';
+import { UseAuthContext } from './context/UseAuthContext';
+import { ProtectedRoutes } from './shared/ProtectedRoutes';
+import { GuestRoutes } from './shared/GuestRoutes';
+import { AdminRequest } from './admin/pages/AdminRequest';
 
 function App() {
-  const {dispatch} = UseDataContext();
+  const {dispatch, loading} = UseDataContext();
+  const {dispatch:handle, loading:authLoading, user} = UseAuthContext();
 //useEffect to fetch product
 useEffect(()=>{
+  dispatch({type:"loading", payload:true})
   const fetchData = async ()=>{
     try{
       const response = await fetch('http://localhost:5000/product');
+      if(!response.ok){
+        throw Error('error fetching data')
+      }
       const json = await response.json();
       console.log('product',json)
       dispatch({type:'getProduct', payload:json})
 
     }catch(error){
       console.error(error)
+      dispatch({type:'loading', payload:false})
     }
 
 
@@ -33,37 +43,88 @@ useEffect(()=>{
 //useeffect to fetch orders
 
 useEffect(()=>{
+  dispatch({type:'loading', payload:true});
   const fetchData = async ()=>{
+    if(!user){
+      return dispatch({ type: 'loading', payload: false }); 
+    }
     try{
-      const response = await fetch('http://localhost:5000/order');
+      const response = await fetch('http://localhost:5000/order',{
+        headers:{
+          'Authorization': `Bearer ${user?.token}`,
+        }
+      });
+      if(!response.ok){
+        throw Error('error getting orders')
+      }
       const json = await response.json();
       console.log('order',json)
       dispatch({type:'getOrders', payload:json})
 
     }catch(error){
-      console.error(error)
+      console.error(error);
+      dispatch({type:'loading', payload:false})
     }
 
 
   }
   fetchData();
-},[]);
+},[user]);
+
+
+useEffect(()=>{
+  const fetchAuthorities = async()=>{
+    if(!user){
+      return handle({type:"loading", payload:false})
+    }
+    try{
+      const response = await fetch('http://localhost:5000/user/getusers',{
+      headers:{
+        'Authorization': `Bearer ${user?.token}`
+      }
+    })
+    if(!response.ok){
+      throw Error('an error occured')
+    }
+    const json = await response.json();
+    dispatch({type:'getadmin', payload:json})
+    }catch(error){
+      console.error(error)
+    }
+  }
+  fetchAuthorities();
+},[user])
+
+//useffect for authentication
+useEffect(()=>{
+handle({type:'loading',payload:true})
+const user = localStorage.getItem('user');
+if(user){
+  handle({type:'getUser', payload:JSON.parse(user)})
+}
+handle({type:'loading',payload:false})
+},[])
+
+if(loading || authLoading){
+  return <p>loading...</p>
+}
 
 
   const router = createBrowserRouter(createRoutesFromElements(
     <>
     <Route path='/arkcitygas' element={<Outlet/>}>
       <Route index element={<Home/>}/>
-      {/* <Route path=':category' element={<CategoryLayout/>}/> */}
     </Route>
 
     <Route path='/admin_jctbdil1$'element={<Main/>}>
-      <Route index element={<Dashboard/>}/>
-      <Route path='manageorders' element={<ManageOrders/>}/>
-      <Route path='product' element={<Outlet/>}>
+      <Route index element={<ProtectedRoutes user={user}><Dashboard/></ProtectedRoutes>}/>
+      <Route path='manageorders' element={<ProtectedRoutes user={user}><ManageOrders/></ProtectedRoutes>}/>
+      <Route path='product' element={<ProtectedRoutes user={user}><Outlet/></ProtectedRoutes>}>
         <Route path='addproduct' element={<AddProduct/>}/>
         <Route path=':id' element={<DashboardProduct/>}/>
       </Route>
+      <Route path='adminrequest' element={<AdminRequest/>}/>
+      <Route path='session' element={<GuestRoutes user={user}><Session/></GuestRoutes>}/>
 
       
 

@@ -10,7 +10,7 @@ export const OrderList = ()=>{
                 <h3>Recent Orders</h3>
                 <div className={styles.scrollablediv}>
                 {
-                    orders?.map(order=>(
+                    orders && orders.map(order=>(
                         <div key={order._id}>
                             <strong>{order.name}</strong><br/>
                             <small>OrderId: {order._id}</small>

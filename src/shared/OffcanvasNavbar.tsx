@@ -4,12 +4,15 @@ import { PlusOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { UseDataContext } from "../context/UseDataContext";
 import { FlatButton } from "./FlatButton";
+import { UseAuthContext } from "../context/UseAuthContext";
+
 
 
 export const OffcanvasNavbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const {dispatch} = UseDataContext();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const {dispatch:handle, user} =UseAuthContext();
   const handleNavLinkClick = () => {
   const dismissButton = document.querySelector(
     '#offcanvasNavbar [data-bs-dismiss="offcanvas"]'
@@ -22,8 +25,15 @@ export const OffcanvasNavbar = () => {
 
  // Runs when route changes
 
+ const handleLogOut = ()=>{
+  if (!user){ return}
+    localStorage.removeItem('user');
+    handle({type:'logout'});
+    dispatch({type:'getOrders', payload:null});
+ }
+
   return (
-    <nav className="navbar bg-body-tertiary fixed-top">
+    <nav className="navbar bg-body-tertiary">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/admin_jctbdil1$" >
           ArkCity Gas
@@ -98,15 +108,23 @@ export const OffcanvasNavbar = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <NavLink className="dropdown-item" to="#" onClick={handleNavLinkClick}>
+                    <NavLink className="dropdown-item" to="/admin_jctbdil1$/adminrequest" onClick={handleNavLinkClick}>
                       Admin Request
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink className="dropdown-item" to="#" onClick={handleNavLinkClick}>
-                      Log Out
-                    </NavLink>
-                  </li>
+                  {
+                    user && (
+                      <li>
+                        <NavLink className="dropdown-item" to="#" 
+                         onClick={() => {
+                          handleNavLinkClick();
+                          handleLogOut();
+                        }}>
+                          Log Out
+                        </NavLink>
+                      </li>
+                    )
+                  }
                 </ul>
               </li>
             </ul>

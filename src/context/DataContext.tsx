@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { OrderType, ProductType } from "../shared/types";
+import { OrderType, ProductType, User } from "../shared/types";
 
 export type valueProps = stateProps & {
   dispatch: React.Dispatch<actionProps>;
@@ -14,6 +14,7 @@ type stateProps = {
   loading: boolean;
   orders: OrderType[] | null;
   searchQuery:string | null;
+  admin:User[] | null;
 };
 
 type productProps = {
@@ -47,14 +48,24 @@ type searchProps = {
   type:'searchQuery';
   payload:string | null
 }
+type postprops = {
+  type:'addproduct',
+  payload:ProductType
+}
+type adminProps = {
+  type:'getadmin',
+  payload:User[] | null
+}
 
-type actionProps = productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps;
+
+type actionProps =  adminProps | productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps | postprops;
 
 const initialState: stateProps = {
   product: null,
   loading: false,
   orders: null,
   searchQuery: null,
+  admin:null,
 };
 
 export const Context = createContext({} as valueProps);
@@ -62,18 +73,23 @@ export const Context = createContext({} as valueProps);
 const reducer = (state: stateProps, action: actionProps): stateProps => {
   switch (action.type) {
     case "getProduct":
-      return { ...state, product: action.payload };
+      return { ...state, product: action.payload, loading: false };
     case "loading":
       return { ...state, loading: action.payload };
     case "getOrders":
-      return { ...state, orders: action.payload };
+      return { ...state, orders: action.payload, loading: false };
     case "searchQuery":
-      return {...state, searchQuery:action.payload}
+      return {...state, searchQuery:action.payload, loading: false}
     case "deleteProduct":
       return {
         ...state,
         product: state.product?.filter((p) => p._id !== action.payload) ?? null,
       };
+    case "addproduct":
+    return {
+      ...state,
+      product: [action.payload, ...state.product ?? []], // prepend the new product
+    };
     case "updateProduct":
     return {
       ...state,
@@ -88,6 +104,10 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
         p._id === action.payload._id ? action.payload : p
       ) ?? null,
     };
+
+    case 'getadmin':
+      return {...state, admin:action.payload, loading:false}
+  
     default:
       return state;
   }
