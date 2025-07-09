@@ -154,20 +154,8 @@ export const reviews = [
     status: "Regular Customer",
     // image: demoImage,
   },
-  {
-    fullName: "Michael Obi",
-    rating: 4,
-    description: "Reliable supplier for my restaurant. Bulk orders are always on time.",
-    status: "Bulk Buyer",
-    image: demoImage,
-  },
-  {
-    fullName: "Fatima Bello",
-    rating: 5,
-    description: "Tried them for the first time and I’m impressed. Will definitely order again.",
-    status: "First-Time Customer",
-    image: demoImage,
-  },
+
+
   {
     fullName: "Chidi Okafor",
     rating: 4,

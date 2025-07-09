@@ -4,6 +4,7 @@ import { FlatButton } from '../../shared/FlatButton';
 import { OrderType } from '../../shared/types';
 import { useState } from 'react';
 import { OrderHooks } from '../Hooks/OrderHooks';
+import { SendMessage } from './SendMessage';
 
 const { Text } = Typography;
 
@@ -19,6 +20,7 @@ type modaltype = {
 
 export const OrderModal = ({ selectedService, isOpen, handleCloseModal }:modaltype) => {
   const [loading, setLoading] = useState(false);
+  const [openMessage, setOpenMessage] = useState(false);
   const {updateOrderStatus} = OrderHooks();
   if (!selectedService) return null;
   
@@ -32,7 +34,9 @@ export const OrderModal = ({ selectedService, isOpen, handleCloseModal }:modalty
     address,
     phone,
     status,
-    _id
+    _id,
+    product,
+    category,
   } = selectedService;
 
   const getStatusTag = (orderStatus:string) => {
@@ -71,9 +75,14 @@ export const OrderModal = ({ selectedService, isOpen, handleCloseModal }:modalty
       footer={null}
     >
       <Descriptions bordered column={1} size="middle">
+        <Descriptions.Item label="orderId">{_id}</Descriptions.Item>
         <Descriptions.Item label="Name">{name}</Descriptions.Item>
-        <Descriptions.Item label="Email">{email}</Descriptions.Item>
-        <Descriptions.Item label="Phone">{phone}</Descriptions.Item>
+        <Descriptions.Item label="product">{product}</Descriptions.Item>
+        <Descriptions.Item label="category">{category}</Descriptions.Item>
+        <Descriptions.Item label="Email" ><span style={{cursor:"pointer"}} onClick={()=>setOpenMessage(true)}>
+          {email}</span>
+        </Descriptions.Item>
+        <Descriptions.Item label="Phone"><a href={`tel:${phone}`}>{phone}</a></Descriptions.Item>
         <Descriptions.Item label="Address">{address}</Descriptions.Item>
         <Descriptions.Item label="Reference">
           <Text code>{reference}</Text>
@@ -90,6 +99,8 @@ export const OrderModal = ({ selectedService, isOpen, handleCloseModal }:modalty
         {orderStatus == 'shipped' && <FlatButton disabled={loading} title='Order Complete' className='btnlight' onClick={()=>{updateOrderStatus(_id, 'complete',setLoading);handleCloseModal()}}/>}
         {orderStatus =='processing' && <FlatButton disabled={loading} title='Ship Order' className='btnlight' onClick={()=>{updateOrderStatus(_id, 'shipped',setLoading);handleCloseModal()}}/>}
       </div>
+
+      <SendMessage selectedEmail={email} isModalOpen={openMessage} setIsModalOpen={setOpenMessage}/>
     </Modal>
   );
 };

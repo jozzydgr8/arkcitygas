@@ -32,6 +32,8 @@ export type OrderType = {
   address?:string,
   phone?:string,
   orderStatus:string,
+  product?:string,
+  category?:string
 }
 
 export type User = {
