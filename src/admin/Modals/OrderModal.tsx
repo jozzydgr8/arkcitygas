@@ -37,6 +37,7 @@ export const OrderModal = ({ selectedService, isOpen, handleCloseModal }:modalty
     _id,
     product,
     category,
+    notes
   } = selectedService;
 
   const getStatusTag = (orderStatus:string) => {
@@ -84,6 +85,7 @@ export const OrderModal = ({ selectedService, isOpen, handleCloseModal }:modalty
         </Descriptions.Item>
         <Descriptions.Item label="Phone"><a href={`tel:${phone}`}>{phone}</a></Descriptions.Item>
         <Descriptions.Item label="Address">{address}</Descriptions.Item>
+        <Descriptions.Item label="Additional Notes">{notes}</Descriptions.Item>
         <Descriptions.Item label="Reference">
           <Text code>{reference}</Text>
         </Descriptions.Item>

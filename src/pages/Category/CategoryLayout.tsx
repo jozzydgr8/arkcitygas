@@ -3,6 +3,7 @@ import { FlatButton } from "../../shared/FlatButton";
 import { dataType, paystacksuccesresponse, ProductType } from "../../shared/types";
 import { ModalComponent } from "../homepage/component/ModalComponent";
 import { UseDataContext } from "../../context/UseDataContext";
+import { toast } from "react-toastify";
 
 type props = {
   active:string
@@ -25,8 +26,9 @@ const items = active === "All Products" ? product : product && product.filter(it
 
  //handle finish on succesful payment
  const handleFinish = async (response:paystacksuccesresponse)=>{
-    // setLoading(true);
-    const res = await fetch('http://localhost:5000/order/verify-payment/',{
+    setLoading(true);
+    try{
+      const res = await fetch('https://arkcityserver.vercel.app/order/verify-payment/',{
       method:'POST',
       headers:{"Content-Type": "application/json"},
       body:JSON.stringify({reference:response.reference})
@@ -34,10 +36,18 @@ const items = active === "All Products" ? product : product && product.filter(it
     const result = await res.json();
     if(result.status === 'success'){
       console.log('payment succesful');
-      alert('payment success')
+      toast.success('order succesful')
     }else{
       console.log('verification failed')
-      alert('verification failed')
+      throw Error('An error occured try again later')
+    }
+    }catch(error){
+       toast.error('An error occured try again later')
+    }finally{
+      handleCloseModal()
+      setLoading(false);
+      setProceedPayment(false);
+      
     }
 
  
@@ -79,6 +89,11 @@ const items = active === "All Products" ? product : product && product.filter(it
         display_name: "category",
         variable_name: "category",
         value: selectedService?.category
+      },
+      {
+        display_name: "Additional notes",
+        variable_name: "notes",
+        value: dataSubmit.notes
       }
     ]
   },

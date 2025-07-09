@@ -45,8 +45,14 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
             onCancel={handleCloseModal}
             footer={null}
             >
-            <p>{selectedService?.description}</p>
-
+            
+            <div style={{display:'flex', justifyContent:"space-between", alignItems:'center', marginBottom:"5px"}}>
+                <p>{selectedService?.description}</p>
+                <a href="tel:08138621241" target="_blank">
+                    <FlatButton title="Call Us?" className="btndark"/>
+                </a>
+            </div>
+            <small>**place Order before 12pm for same day delivery or call us!</small>
             <Formik
             initialValues={{
                 name: '',
@@ -141,6 +147,7 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
 
                     </>
                 }
+                
                 </form>
             )}
             </Formik>

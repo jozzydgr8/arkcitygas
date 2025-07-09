@@ -3,6 +3,7 @@ export type dataType = {
     name:string,
     phone:string,
     address:string,
+    notes?:string,
 }
 
 export type ProductType = {
@@ -33,7 +34,8 @@ export type OrderType = {
   phone?:string,
   orderStatus:string,
   product?:string,
-  category?:string
+  category?:string,
+  notes?:string,
 }
 
 export type User = {
