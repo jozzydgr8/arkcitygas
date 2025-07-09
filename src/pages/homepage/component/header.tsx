@@ -29,11 +29,12 @@ export const Header = ()=>{
                             Certified by DPR and SON for your safety.
                         </p>
                         <div>
-                            <FlatButton title="Order Gas Now" className="btndark"/>
+                            <a href="/#product"><FlatButton title="Order Gas Now" className="btndark"/></a>
+                            
                             
 
                         </div>
-                        <a href="tel:" target="_blank">Call Us Now</a>
+                        <a href="tel:08138621241" target="_blank">Call Us Now</a>
                     </div>
 
 

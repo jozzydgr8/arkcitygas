@@ -47,8 +47,9 @@ function Footer() {
                 </div>
             </Col>
             <Col style={{ color: '#ccc' }} span={24}>
-                <a href='tel:+2348123456789'target='_blank'><b>Phone</b>:+234 812 345 6789</a><br/>
-                <a href='mailto:info@arkcitylpg.com' target='_blank'><b>Email</b>:info@arkcitylpg.com</a><br/>
+                <a href='tel:08138621241'target='_blank'><b>Phone</b>:+234 813 8621 241</a><br/>
+                <a href='tel:09165068033'target='_blank'>+234 916 5068 033</a><br/>
+                <a href='mailto:arkcitylpg@gmail.com' target='_blank'><b>Email</b>:arkcitylpg@gmail.com</a><br/>
                 <b>Hours</b>: Mon-Sun: 8AM-8PM<br/>
             </Col>
            </Row>
@@ -60,7 +61,7 @@ function Footer() {
             <Row gutter={[0, 12]}>
               {links.map((link, idx) => (
                 <Col span={24} key={idx}>
-                  <Link to={link.href} style={{ color: '#ccc' }}>{link.title}</Link>
+                  <a href={link.href} style={{ color: '#ccc' }}>{link.title}</a>
                 </Col>
               ))}
             </Row>
@@ -85,7 +86,7 @@ function Footer() {
             <Row gutter={[0, 12]}>
               {serviceValues.map((link, idx) => (
                 <Col span={24} key={idx}>
-                  <Link to={'/'} style={{ color: '#ccc' }}>{link.title}</Link>
+                  <a href='/#product' style={{ color: '#ccc' }}>{link.title}</a>
                 </Col>
               ))}
             </Row>

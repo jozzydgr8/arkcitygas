@@ -17,8 +17,14 @@ export const Choose = ()=>{
                         You can trust that you're getting the highest quality LPG products and service.
                         </p>
                         <div>
+                            <a href="https://wa.link/6hbzdj" target="_blank">
                             <FlatButton className="btndark" title="Learn More About Us"/>
-                            <FlatButton title="Contact Us" className="btnlight"/>
+                            </a>
+                            <a href="https://wa.link/6hbzdj" target="_blank">
+                             <FlatButton title="Contact Us" className="btnlight"/>
+                            </a>
+                            
+                           
                         </div>
                         </div>
 
@@ -45,9 +51,12 @@ export const Choose = ()=>{
                     <h2>Ready to Order your Cooking Gas?</h2>
                     <p>Experience the conveninece of fast, safe and affordable gas delivery straight to your doorstep.</p>
                     <div>
-                        <FlatButton title="Order Now" className="btndark"/>  
-                         <a href="tel:+2348123456789">
-                            Call+234 812 345 6789
+                        <a href="/#product" target="_blank">
+                        <FlatButton title="Order Now" className="btndark"/> 
+                        </a>
+                         
+                         <a href="tel:08138621241">
+                            Call+234 813 8621 241
                          </a>
                     </div>
                 </div>

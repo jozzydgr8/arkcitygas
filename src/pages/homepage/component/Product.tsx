@@ -10,7 +10,7 @@ import { CategoryLayout } from "../../Category/CategoryLayout";
 export const Product = () => {
   const [active, setActive] = useState('All Products');
   return (
-    <section>
+    <section id="#product">
       <div className="container-fluid">
         <h2>Our Products</h2>
         <p style={{textAlign:"center"}}>High Quality LPG cylinders and accessories at competitive prices</p>

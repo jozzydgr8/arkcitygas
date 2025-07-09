@@ -40,7 +40,7 @@ export const HowItWorks = ()=>{
                         </Row>
 
                         <div style={{marginTop:'20px'}}>
-                            <FlatButton title="Place Your Order Now" onClick={()=>console.log('order')} className="btndark"/>
+                            <a href="/#product"><FlatButton title="Place Your Order Now" onClick={()=>console.log('order')} className="btndark"/></a>
                         </div>
                     </div>
                 </div>

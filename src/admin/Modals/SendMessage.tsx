@@ -3,6 +3,7 @@ import { Modal, Form, Input, Button } from "antd";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { UseAuthContext } from "../../context/UseAuthContext";
 
 type proptype = {
   selectedEmail: string | string[];
@@ -15,12 +16,14 @@ type valueprops = {
 }
 
 export const SendMessage = ({ selectedEmail, isModalOpen, setIsModalOpen }: proptype) => {
+  const {user} = UseAuthContext();
   const deliverNewsLetter = async(values:valueprops)=>{
     try{
-      const response = await fetch("http://localhost:5000/message/send_newsletter", {
+      const response = await fetch("https://arkcityserver.vercel.app/message/send_newsletter", {
         method:'POST',
         headers:{
             'Content-Type': 'application/json',
+            'Authorization':`Bearer ${user?.token}`
         },
         body:JSON.stringify({
         subject: values.subject,
@@ -53,7 +56,6 @@ export const SendMessage = ({ selectedEmail, isModalOpen, setIsModalOpen }: prop
       console.log("Sending Email to:", selectedEmail);
       console.log("Form values:", values);
 
-      // Here you can call your email sending function/API
       deliverNewsLetter(values);
       setIsModalOpen(false);
       resetForm();

@@ -40,7 +40,7 @@ export const ProductHooks = ()=>{
 
             try {
                     
-                    const res = await fetch("http://localhost:5000/product", {
+                    const res = await fetch("https://arkcityserver.vercel.app/product", {
                         method: "POST",
                         headers:{
                             'Authorization': `Bearer ${user?.token}`,
@@ -72,7 +72,7 @@ export const ProductHooks = ()=>{
     
     const deleteProduct = async(_id:string)=>{
         try{
-            const response = await fetch(`http://localhost:5000/product/${_id}`,{
+            const response = await fetch(`https://arkcityserver.vercel.app/product/${_id}`,{
                 method:'delete',
                 headers:{
                     'Authorization': `Bearer ${user?.token}`,
@@ -121,7 +121,7 @@ export const ProductHooks = ()=>{
     }
 
     try {
-        const response = await fetch(`http://localhost:5000/product/${_id}`, {
+        const response = await fetch(`https://arkcityserver.vercel.app/product/${_id}`, {
             method: "PATCH",
             headers:{
                 'Authorization': `Bearer ${user?.token}`,

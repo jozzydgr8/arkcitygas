@@ -12,7 +12,7 @@ export const Advertisement = ()=>{
                             <div className="adverthighlight">{item.label}</div>
                             <p>{item.text}</p>
                             {item.button.show && (
-                            <FlatButton className="btnalternate" title={item.button.title} />
+                            <a href={item.link} target={item?.target}><FlatButton className="btnalternate" title={item.button.title} /></a>
                             )}
                         </div>
                         </div>

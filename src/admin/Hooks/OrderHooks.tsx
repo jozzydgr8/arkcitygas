@@ -9,7 +9,7 @@ export const OrderHooks = ()=>{
         setLoading(true);
         console.log(orderStatus)
         try{
-            const response = await fetch(`http://localhost:5000/order/${_id}`,{
+            const response = await fetch(`https://arkcityserver.vercel.app/order/${_id}`,{
                 method:'PATCH',
                  headers: {
                     'Content-Type': 'application/json',

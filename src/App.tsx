@@ -22,7 +22,7 @@ useEffect(()=>{
   dispatch({type:"loading", payload:true})
   const fetchData = async ()=>{
     try{
-      const response = await fetch('http://localhost:5000/product');
+      const response = await fetch('https://arkcityserver.vercel.app/product');
       if(!response.ok){
         throw Error('error fetching data')
       }
@@ -49,7 +49,7 @@ useEffect(()=>{
       return dispatch({ type: 'loading', payload: false }); 
     }
     try{
-      const response = await fetch('http://localhost:5000/order',{
+      const response = await fetch('https://arkcityserver.vercel.app/order',{
         headers:{
           'Authorization': `Bearer ${user?.token}`,
         }
@@ -78,7 +78,7 @@ useEffect(()=>{
       return handle({type:"loading", payload:false})
     }
     try{
-      const response = await fetch('http://localhost:5000/user/getusers',{
+      const response = await fetch('https://arkcityserver.vercel.app/user/getusers',{
       headers:{
         'Authorization': `Bearer ${user?.token}`
       }
@@ -123,7 +123,7 @@ if(loading || authLoading){
         <Route path='addproduct' element={<AddProduct/>}/>
         <Route path=':id' element={<DashboardProduct/>}/>
       </Route>
-      <Route path='adminrequest' element={<AdminRequest/>}/>
+      <Route path='adminrequest' element={<ProtectedRoutes user={user}><AdminRequest/></ProtectedRoutes>}/>
       <Route path='session' element={<GuestRoutes user={user}><Session/></GuestRoutes>}/>
 
       

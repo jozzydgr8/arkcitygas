@@ -56,9 +56,21 @@ type adminProps = {
   type:'getadmin',
   payload:User[] | null
 }
+type updateadminProps ={
+  type:'updateadmin',
+  payload:User
+}
+type deletadminProps ={
+  type:'deleteadmin',
+  payload:string
+}
+type createadminProps = {
+  type:'createadmin',
+  payload:User
+}
 
 
-type actionProps =  adminProps | productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps | postprops;
+type actionProps = createadminProps | deletadminProps | updateadminProps | adminProps | productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps | postprops;
 
 const initialState: stateProps = {
   product: null,
@@ -88,7 +100,7 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
     case "addproduct":
     return {
       ...state,
-      product: [action.payload, ...state.product ?? []], // prepend the new product
+      product: [action.payload, ...(state.product ?? [])], // prepend the new product
     };
     case "updateProduct":
     return {
@@ -106,7 +118,34 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
     };
 
     case 'getadmin':
-      return {...state, admin:action.payload, loading:false}
+      return {...state, admin:action.payload, loading:false};
+
+    case "updateadmin": {
+      const currentAdmins = state.admin ?? [];
+      const exists = currentAdmins.some(p => p.email === action.payload.email);
+
+      return {
+        ...state,
+        admin: exists
+          ? currentAdmins.map(p =>
+              p.email === action.payload.email ? action.payload : p
+            )
+          : [...currentAdmins, action.payload],
+      };
+    }
+
+    case "deleteadmin":
+        return {
+          ...state,
+          admin: state.admin?.filter((p) => p.email !== action.payload) ?? null,
+        };
+    case "createadmin":
+    return {
+      ...state,
+    admin: [action.payload, ...(state.admin ?? [])],
+    };
+
+
   
     default:
       return state;

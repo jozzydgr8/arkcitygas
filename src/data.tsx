@@ -84,17 +84,22 @@ export const adItems = [
   {
     label: "Today",
     text: "Order before 12pm to get same day delivery",
-    button: { title: "Order Now", show: true }
+    button: { title: "Order Now", show: true },
+    link:'/#product'
+   
   },
   {
     label: "New",
     text: "Bulk Discounts for Commercial Customers",
-    button: { title: "Inquire", show: true }
+    button: { title: "Inquire", show: true },
+    link:'https://wa.link/6hbzdj',
+    target:'_blank'
   },
   {
     label: "Offer",
     text: "Free Hose & Regulator with New Cylinder Purchase",
-    button: { title:'View Products', show: true }
+    button: { title:'View Products', show: true },
+    link:'/#product'
   }
 ];
 
