@@ -37,6 +37,7 @@ export const ProductList = ()=>{
             }
 
         </Marquee>
+        {product?.length==0 && <small style={{color:"gray"}}>products uploaded will be here...</small>}
         
         <div>
             <NavLink to={'/admin_jctbdil1$/product/addproduct'}>

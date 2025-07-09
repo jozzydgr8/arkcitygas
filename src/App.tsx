@@ -40,6 +40,16 @@ useEffect(()=>{
   fetchData();
 },[]);
 
+//useffect for authentication
+useEffect(()=>{
+handle({type:'loading',payload:true})
+const user = localStorage.getItem('user');
+if(user){
+  handle({type:'getUser', payload:JSON.parse(user)})
+}
+handle({type:'loading',payload:false})
+},[])
+
 //useeffect to fetch orders
 
 useEffect(()=>{
@@ -71,7 +81,7 @@ useEffect(()=>{
   fetchData();
 },[user]);
 
-
+//use effect to fetch authorities
 useEffect(()=>{
   const fetchAuthorities = async()=>{
     if(!user){
@@ -95,19 +105,38 @@ useEffect(()=>{
   fetchAuthorities();
 },[user])
 
-//useffect for authentication
+
+
+//useEffect to fetch subscribers
 useEffect(()=>{
-handle({type:'loading',payload:true})
-const user = localStorage.getItem('user');
-if(user){
-  handle({type:'getUser', payload:JSON.parse(user)})
-}
-handle({type:'loading',payload:false})
-},[])
+  const fetchSubscribers = async()=>{
+    if(!user){
+      return handle({type:"loading", payload:false})
+    }
+    try{
+      const response = await fetch('https://arkcityserver.vercel.app/subscribe',{
+      headers:{
+        'Authorization': `Bearer ${user?.token}`
+      }
+    })
+    if(!response.ok){
+      throw Error('an error occured')
+    }
+    const json = await response.json();
+    dispatch({type:'getSubscribers', payload:json})
+    }catch(error){
+      console.error(error)
+    }
+  }
+  fetchSubscribers();
+},[user]);
+
+
 
 if(loading || authLoading){
   return <p>loading...</p>
 }
+
 
 
   const router = createBrowserRouter(createRoutesFromElements(

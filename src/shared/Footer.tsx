@@ -1,11 +1,11 @@
 import { Col, Form, Input, Row, Typography } from 'antd';
-import logo from '../assets/arkcitylogo.png';
 import { InstagramOutlined, FacebookOutlined, LinkedinOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { FlatButton } from './FlatButton';
 import { useState } from 'react';
 import {  serviceValues } from '../data';
 import { UseDataContext } from '../context/UseDataContext';
+import { toast } from 'react-toastify';
 
 
 const { Title, Paragraph } = Typography;
@@ -13,7 +13,29 @@ const { Title, Paragraph } = Typography;
 function Footer() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const {product} = UseDataContext()
+  const {product} = UseDataContext();
+
+  const handleSubscribe = async()=>{
+    setLoading(true)
+    try{
+      const response = await fetch('https://arkcityserver.vercel.app/subscribe',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({email:email})
+      })
+      if(!response.ok){
+        throw Error('error subscribing')
+      }
+      toast.success('Thank you for subscribing to our News Letter');
+      setEmail('');
+    }catch(error){
+      toast.error('an error occured');
+    }finally{
+      setLoading(false);
+    }
+  }
 
   
 
@@ -124,6 +146,7 @@ function Footer() {
                 className="btndark"
                 title="Subscribe"
                 disabled={loading}
+                onClick={handleSubscribe}
               />
             </Form>
           </Col>

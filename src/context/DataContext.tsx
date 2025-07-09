@@ -15,6 +15,7 @@ type stateProps = {
   orders: OrderType[] | null;
   searchQuery:string | null;
   admin:User[] | null;
+  subscribers:User[] | null;
 };
 
 type productProps = {
@@ -69,8 +70,12 @@ type createadminProps = {
   payload:User
 }
 
+type subscribeProps ={
+  type:'getSubscribers',
+  payload:User[]
+}
 
-type actionProps = createadminProps | deletadminProps | updateadminProps | adminProps | productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps | postprops;
+type actionProps = subscribeProps | createadminProps | deletadminProps | updateadminProps | adminProps | productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps | postprops;
 
 const initialState: stateProps = {
   product: null,
@@ -78,6 +83,7 @@ const initialState: stateProps = {
   orders: null,
   searchQuery: null,
   admin:null,
+  subscribers:null
 };
 
 export const Context = createContext({} as valueProps);
@@ -144,6 +150,11 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
       ...state,
     admin: [action.payload, ...(state.admin ?? [])],
     };
+
+    case "getSubscribers":
+      return{
+        ...state, subscribers:action.payload, loading:false
+      }
 
 
   

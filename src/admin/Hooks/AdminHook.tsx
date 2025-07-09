@@ -87,7 +87,10 @@ export const AdminHook = ()=>{
         password:string,
         newPassword:string
     }
-    const updatePassword = async ({password,newPassword}:passwordprops, setLoading:React.Dispatch<React.SetStateAction<boolean>>)=>{
+    const updatePassword = async ({password,newPassword}:passwordprops, setLoading:React.Dispatch<React.SetStateAction<boolean>>,setPassword: React.Dispatch<React.SetStateAction<{
+    password: string;
+    newPassword: string;
+}>>)=>{
         try{
             const response = await fetch('https://arkcityserver.vercel.app/user/update-password',{
                 method:'POST',
@@ -104,6 +107,11 @@ export const AdminHook = ()=>{
         }catch(error){
             console.error(error);
             toast.error('an error occured updating password')
+        }finally{
+            setPassword({
+                password:'',
+                newPassword:""
+            })
         }
     }
     

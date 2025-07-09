@@ -11,7 +11,6 @@ const { Option } = Select;
 export const AdminRequest = ()=>{
     const [filterStatus, setFilterStatus] = useState(false);
     const [email, setEmail] = useState('');
-    const [newPassword, setNewpassword] = useState('');
     const [password, setPassword] = useState({password:"", newPassword:''});
     const {admin} = UseDataContext();
     const {user} = UseAuthContext();
@@ -28,10 +27,14 @@ export const AdminRequest = ()=>{
                 onChange={value => setFilterStatus(value === 'true')}
                 style={{ width: 200 }}
                 >
-                    <Option value='true'> Accepted Admin </Option>
-                    <Option value='false'>Make Admin</Option>
+                    <Option value='true'> Admins </Option>
+                    <Option value='false'>Admin Requests</Option>
 
                 </Select>
+                <br/>
+                {filterStatus == true?<small style={{color:"gray"}}>list of Accepted Admins</small>:<small>Accounts created but yet to be admin </small>}
+               <br/>
+                {filteredAuth?.length ===0 && <small style={{color:"gray"}}>No account here...</small>}
                 {
                     filteredAuth?.map(data=>(
                         <div key={data.email} className={Style.ordercontainer}>
@@ -71,14 +74,15 @@ export const AdminRequest = ()=>{
                         style={{
                             background:'none', 
                             width:"100%", 
-                            border:"solid 1px ", 
-                            padding:"16px", 
+                            border:"solid 1px gray", 
+                            padding:"6px", 
+                            margin:"6px",
                             borderRadius:"10px"}}/>
                             
                         <div>
                             <FlatButton disabled={loading}  title="Create Account" className="btndark" onClick={()=>createAdmin(email, setLoading)}/>
                         </div>
-                        <small>Once account created you need to refresh to see admin</small>
+                        <small style={{color:"gray"}}>** Once account created you need to refresh to see admin</small>
                     </div>
                 </div>
                     </div>
@@ -93,8 +97,9 @@ export const AdminRequest = ()=>{
                                 style={{
                                     background:'none', 
                                     width:"100%", 
-                                    border:"solid 1px ", 
-                                    padding:"16px", 
+                                   border:"solid 1px gray", 
+                                    padding:"6px", 
+                                    margin:"6px",
                                     borderRadius:"10px"}}/>
                                 </div>
                                 <br/>
@@ -104,15 +109,16 @@ export const AdminRequest = ()=>{
                                         style={{
                                             background:'none', 
                                             width:"100%", 
-                                            border:"solid 1px ", 
-                                            padding:"16px", 
+                                            border:"solid 1px gray", 
+                                            padding:"6px", 
+                                            margin:"6px",
                                             borderRadius:"10px"}}/>
                                 </div>
                                     
                                 <div>
-                                    <FlatButton disabled={loading}  title="Update Password" className="btndark" onClick={()=>updatePassword(password, setLoading)}/>
+                                    <FlatButton disabled={loading}  title="Update Password" className="btndark" onClick={()=>updatePassword(password, setLoading, setPassword)}/>
                                 </div>
-                                <small>password would be reset</small>
+                                <small style={{color:"gray"}}>password would be reset</small>
                             </div>
                         
                         </div>
