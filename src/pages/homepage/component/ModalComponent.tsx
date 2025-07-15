@@ -94,8 +94,9 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
                     name="email"
                     value={formik.values.email}
                     onChange={formik.handleChange}
-                    placeholder="Email (optional)"
+                    placeholder="Email "
                     style={{ marginBottom: '1rem' }}
+                    required
                 />
 
                 <Input
@@ -113,7 +114,7 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
                     name="message"
                     value={formik.values.message}
                     onChange={formik.handleChange}
-                    placeholder="Additional Notes"
+                    placeholder="Additional Notes (optional)"
                     rows={3}
                     style={{ marginBottom: '1rem' }}
                 />
