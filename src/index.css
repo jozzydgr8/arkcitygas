@@ -523,6 +523,29 @@ input:-webkit-autofill {
   }
 } 
 
+/* animation animation */
+.sectionAnimationLeft{
+  scroll-behavior: smooth;
+  animation: backInLeft;
+  animation-duration: 1.5s;
+}
+.sectionAnimationDown{
+  scroll-behavior: smooth;
+  animation:fadeInDownBig;
+  animation-duration: 1.2s;
+}
+
+.sectionAnimationUp{
+  scroll-behavior: smooth;
+  animation:fadeInUpBig;
+  animation-duration: 1.2s;
+
+}
+.sectionAnimationRight{
+  scroll-behavior: smooth;
+  animation: backInRight;
+  animation-duration: 1.2s;
+}
 
 
 

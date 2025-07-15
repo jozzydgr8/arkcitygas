@@ -2,6 +2,7 @@ import { headerFeatures } from "../../../data";
 import { FlatButton } from "../../../shared/FlatButton";
 import gasbackground from '../../../assets/gascylinderbackground.jpg'
 import Navbar from "../../../shared/Navbar";
+import { useEffect } from "react";
 
 const styles = {
     content:{
@@ -18,15 +19,22 @@ const styles = {
     }
 }
 export const Header = ()=>{
+    useEffect(()=>{
+        var container = document.querySelector('.headerWrite');
+        var containerButton = document.querySelector('.headerbutton');
+        container?.classList.add('sectionAnimationLeft');
+        containerButton?.classList.add('sectionAnimationUp')
+    },[])
+
     return(
         <section style={styles.section}>
             <Navbar/>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-6">
-                        <h1>Fast, Safe & Affordable Cooking Gas Delivery in Ikorodu</h1>
+                        <h1>Fast, Safe & Affordable Cooking Gas Delivery at Your Request</h1>
                         <p>Get your LPG cylinder refilled and delivered to your doorstep within hours.
-                            Certified by DPR and SON for your safety.
+                            Certified by DPR and <a href="https://son.gov.ng/" target="_blank" rel="noreferrer">SON</a> for your safety.
                         </p>
                         <div>
                             <a href="/#product"><FlatButton title="Order Gas Now" className="btndark"/></a>
@@ -34,7 +42,7 @@ export const Header = ()=>{
                             
 
                         </div>
-                        <a href="tel:08138621241" target="_blank">Call Us Now</a>
+                        <a href="tel:08138621241" target="_blank" rel="noreferrer">Call Us Now</a>
                     </div>
 
 

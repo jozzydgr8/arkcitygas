@@ -9,7 +9,7 @@ export const About = ()=>{
                     <div className="col-md-6">
                         <h2>Your Trusted Gas Delivery Partner</h2>
                         <p>Arkcity LPG is committed to providing safe, reliable and affordable cooking gas
-                            delivery services to homes and businesses across Ikorodu and Lagos.
+                            delivery services to homes and businesses conveniently
                         </p>
                         <Row gutter={[16,24]}>
                             {

@@ -50,8 +50,8 @@ function Footer() {
   const legalLinks = [
     {title:'Privacy Policy', href:''},
     {title:'Terms of Service', href:''},
-    {title:'DPR License', href:''},
-    {title:'SON certification', href:''}
+    {title:'DPR License', href:'https://www.nuprc.gov.ng/'},
+    {title:'SON certification', href:'https://son.gov.ng/'}
   ]
 
   return (
@@ -69,9 +69,9 @@ function Footer() {
                 </div>
             </Col>
             <Col style={{ color: '#ccc' }} span={24}>
-                <a href='tel:08138621241'target='_blank'><b>Phone</b>:+234 813 8621 241</a><br/>
-                <a href='tel:09165068033'target='_blank'>+234 916 5068 033</a><br/>
-                <a href='mailto:arkcitylpg@gmail.com' target='_blank'><b>Email</b>:arkcitylpg@gmail.com</a><br/>
+                <a href='tel:08138621241'target='_blank' rel='noreferrer'><b>Phone</b>:+234 813 8621 241</a><br/>
+                <a href='tel:09165068033'target='_blank' rel='noreferrer'>+234 916 5068 033</a><br/>
+                <a href='mailto:arkcitylpg@gmail.com' target='_blank'rel='noreferrer'><b>Email</b>:arkcitylpg@gmail.com</a><br/>
                 <b>Hours</b>: Mon-Sun: 8AM-8PM<br/>
             </Col>
            </Row>
@@ -93,7 +93,7 @@ function Footer() {
           <Col lg={4} md={12} sm={24}>
             <Title level={4} style={{ color: '#fff' }}>Products</Title>
             <Row gutter={[0, 12]}>
-              {product?.filter((item)=>item.category.toLocaleLowerCase() =='refills').map((link, idx) => (
+              {product?.filter((item)=>item.category.toLocaleLowerCase() ==='refill').map((link, idx) => (
                 <Col span={24} key={idx}>
                   <Link to={'/'} style={{ color: '#ccc' }}>{link.title}</Link>
                 </Col>
@@ -155,14 +155,14 @@ function Footer() {
         {/* Social Media Icons */}
         <div style={{ fontSize: '30px', marginTop: '30px' }}>
           <a
-            href="https://www.instagram.com/thetrinityarmsfoundation?igsh=MjFvbTB2MjlzM255&utm_source=qr"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
           >
             <InstagramOutlined />
           </a>
           <a
-            href="https://www.facebook.com/share/1Eg8jui2ZL/?mibextid=wwXIfr"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
             style={{ marginLeft: '16px' }}

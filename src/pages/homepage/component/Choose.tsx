@@ -13,14 +13,14 @@ export const Choose = ()=>{
                         <div>
                         <p>
                         We're not just another gas delivery service. Our commitment to safety reliability and
-                        customer satisfaction sets us apart in the industry. With <a>DPR</a> and <a>SON</a> certifications.
+                        customer satisfaction sets us apart in the industry. With <a href="https://www.nuprc.gov.ng/" target="_blank" rel="noreferrer">DPR</a> and <a href="https://son.gov.ng/" target="_blank" rel="noreferrer">SON</a> certifications.
                         You can trust that you're getting the highest quality LPG products and service.
                         </p>
                         <div>
-                            <a href="https://wa.link/6hbzdj" target="_blank">
+                            <a href="https://wa.link/6hbzdj" target="_blank" rel="noreferrer">
                             <FlatButton className="btndark" title="Learn More About Us"/>
                             </a>
-                            <a href="https://wa.link/6hbzdj" target="_blank">
+                            <a href="https://wa.link/6hbzdj" target="_blank" rel="noreferrer">
                              <FlatButton title="Contact Us" className="btnlight"/>
                             </a>
                             
