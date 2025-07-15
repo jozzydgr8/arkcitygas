@@ -16,7 +16,7 @@ export const Product = () => {
         <p style={{textAlign:"center"}}>High Quality LPG cylinders and accessories at competitive prices</p>
           <div className='product-category-menu'>
             <h4 onClick={() => setActive('All Products')} className={active === 'All Products' ? 'menu-active' : 'productcategory'}>All Products</h4>
-            <h4 onClick={() => setActive('Refills')} className={active === 'Refills' ? 'menu-active' : 'productcategory'}>Refills</h4>
+            <h4 onClick={() => setActive('refill')} className={active === 'refill' ? 'menu-active' : 'productcategory'}>Refills</h4>
             <h4 onClick={() => setActive('cylinders')} className={active === 'cylinders' ? 'menu-active' : 'productcategory'}>Cylinders</h4>
             <h4 onClick={() => setActive('accessories')} className={active === 'accessories' ? 'menu-active' : 'productcategory'}>Accessories</h4>
           </div>

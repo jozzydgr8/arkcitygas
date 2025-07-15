@@ -142,7 +142,7 @@ const items = active === "All Products" ? product : product && product.filter(it
                         style={{
                         backgroundImage: `url(${product.imagePath})`,
                         height: "200px",
-                        backgroundSize: "cover",
+                        backgroundSize: "contain",
                         backgroundPosition: "center center",
                         backgroundRepeat: "no-repeat",
                         }}

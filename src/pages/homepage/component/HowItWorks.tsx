@@ -10,7 +10,7 @@ const Styles = {
         backgroundRepeat:'no-repeat',
         backgroundPosition:'center center',
         minHeight:'400px',
-        borderRadius:'12px'
+        borderRadius:'15px'
     }
 }
 
@@ -21,8 +21,10 @@ export const HowItWorks = ()=>{
                 <h2>How It Works</h2>
                 <p style={{textAlign:'center'}}>Getting your cooking gas delivered has never been easier</p>
                 <div className="row">
-                    <div className="col-md-5 howbackground" style={Styles.container}>
-
+                    <div style={{padding:"24px"}} className="col-md-5">
+                        <div className=" howbackground" style={Styles.container}>
+                            
+                        </div>
                     </div>
                     <div className="col-md-7">
                         <Row gutter={[16,24]}>

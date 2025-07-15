@@ -13,6 +13,7 @@ import { UseAuthContext } from './context/UseAuthContext';
 import { ProtectedRoutes } from './shared/ProtectedRoutes';
 import { GuestRoutes } from './shared/GuestRoutes';
 import { AdminRequest } from './admin/pages/AdminRequest';
+import { Loading } from './shared/Loading';
 
 function App() {
   const {dispatch, loading} = UseDataContext();
@@ -134,7 +135,7 @@ useEffect(()=>{
 
 
 if(loading || authLoading){
-  return <p>loading...</p>
+  return <Loading/>
 }
 
 
