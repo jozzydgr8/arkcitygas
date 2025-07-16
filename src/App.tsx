@@ -191,7 +191,7 @@ if(loading || authLoading){
       <Route index element={<Home/>}/>
     </Route>
 
-    <Route path='/admin_jctbdil1$'element={<Main/>}>
+    <Route path={process.env.REACT_APP_adminroute || '/admin'}element={<Main/>}>
       <Route index element={<ProtectedRoutes user={user}><Dashboard/></ProtectedRoutes>}/>
       <Route path='manageorders' element={<ProtectedRoutes user={user}><ManageOrders/></ProtectedRoutes>}/>
       <Route path='product' element={<ProtectedRoutes user={user}><Outlet/></ProtectedRoutes>}>
