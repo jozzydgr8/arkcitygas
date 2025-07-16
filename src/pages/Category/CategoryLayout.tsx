@@ -52,8 +52,8 @@ const items = active === "All Products" ? product : product && product.filter(it
 
  
   }   
-//  const publicKey = process.env.REACT_APP_Pay_PublicKey!;
-  const publicKey ='pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea';
+ const publicKey = process.env.REACT_APP_Publickey!;
+  // const publicKey ='pk_test_0e745897d2bb51a12c4fca668a094dcecd425aea';
 
    const componentProp = {
   email: dataSubmit.email,
@@ -113,6 +113,7 @@ const items = active === "All Products" ? product : product && product.filter(it
       const handleCloseModal = () => {
         setIsOpen(false);
         setSelectedService(null);
+        setProceedPayment(false);
       };
     
     return (

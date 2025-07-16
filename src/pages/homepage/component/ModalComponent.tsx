@@ -78,6 +78,7 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
                     placeholder="Full Name"
                     style={{ marginBottom: '1rem' }}
                     required
+                    disabled={proceedPayment}
                 />
 
                 <Input
@@ -88,6 +89,7 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
                     placeholder="Phone Number"
                     style={{ marginBottom: '1rem' }}
                     required
+                    disabled={proceedPayment}
                 />
 
                 <Input
@@ -97,6 +99,7 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
                     placeholder="Email "
                     style={{ marginBottom: '1rem' }}
                     required
+                    disabled={proceedPayment}
                 />
 
                 <Input
@@ -106,6 +109,7 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
                     placeholder="Delivery Address"
                     style={{ marginBottom: '1rem' }}
                     required
+                    disabled={proceedPayment}
                 />
 
 
@@ -117,6 +121,7 @@ export const ModalComponent = ({componentProp, isOpen, selectedService, handleCl
                     placeholder="Additional Notes (optional)"
                     rows={3}
                     style={{ marginBottom: '1rem' }}
+                    disabled={proceedPayment}
                 />
 
                 {/* <DatePicker

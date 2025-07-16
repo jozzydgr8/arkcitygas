@@ -187,7 +187,7 @@ if(loading || authLoading){
 
   const router = createBrowserRouter(createRoutesFromElements(
     <>
-    <Route path='/arkcitygas' element={<Outlet/>}>
+    <Route path='/' element={<Outlet/>}>
       <Route index element={<Home/>}/>
     </Route>
 
