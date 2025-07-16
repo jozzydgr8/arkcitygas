@@ -9,7 +9,7 @@ export const Choose = ()=>{
                 
                 <div className="row">
                     <div className="col-md-6">
-                        <h3>Why Choose Arkcity LPG</h3>
+                        <h3 className="animate-down">Why Choose Arkcity LPG</h3>
                         <div>
                         <p>
                         We're not just another gas delivery service. Our commitment to safety reliability and
@@ -36,7 +36,7 @@ export const Choose = ()=>{
                             {
                                 headerFeatures.map((feature, index)=>(
                                     <Col md={12} sm={24} xs={24}>
-                                        <div className="aboutcard" style={{display:"flex", flexDirection:'column', alignItems:'center'}}>
+                                        <div className="aboutcard animate-up" style={{display:"flex", flexDirection:'column', alignItems:'center'}}>
                                             <div>{feature.icon}</div>
                                             <h3>{feature.title}</h3>
                                             <p>{feature.subtitle}</p>
@@ -48,9 +48,9 @@ export const Choose = ()=>{
                     </div>
                 </div>
                 <div style={{textAlign:'center', padding:'7% 0'}}>
-                    <h2>Ready to Order your Cooking Gas?</h2>
+                    <h2 className="animate-down">Ready to Order your Cooking Gas?</h2>
                     <p>Experience the conveninece of fast, safe and affordable gas delivery straight to your doorstep.</p>
-                    <div>
+                    <div className="animate-up">
                         <a href="/#product" target="_blank">
                         <FlatButton title="Order Now" className="btndark"/> 
                         </a>

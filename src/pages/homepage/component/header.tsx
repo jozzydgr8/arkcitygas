@@ -20,10 +20,11 @@ const styles = {
 }
 export const Header = ()=>{
     useEffect(()=>{
-        var container = document.querySelector('.headerWrite');
-        var containerButton = document.querySelector('.headerbutton');
-        container?.classList.add('sectionAnimationLeft');
-        containerButton?.classList.add('sectionAnimationUp')
+        var container = document.querySelectorAll('.headerUp');
+        var containerDown = document.querySelectorAll('.headerDown');
+        container.forEach(container=>container?.classList.add('sectionAnimationUp'));
+        containerDown.forEach(containerDown=> containerDown?.classList.add('sectionAnimationDown'))
+       
     },[])
 
     return(
@@ -31,24 +32,24 @@ export const Header = ()=>{
             <Navbar/>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-6">
-                        <h1>Fast, Safe & Affordable Cooking Gas Delivery at Your Request</h1>
-                        <p>Get your LPG cylinder refilled and delivered to your doorstep within hours.
+                    <div className="col-md-6 headerDown">
+                        <h1 >Fast, Safe & Affordable Cooking Gas Delivery at Your Request</h1>
+                        <p >Get your LPG cylinder refilled and delivered to your doorstep within hours.
                             Certified by DPR and <a href="https://son.gov.ng/" target="_blank" rel="noreferrer">SON</a> for your safety.
                         </p>
-                        <div>
-                            <a href="/#product"><FlatButton title="Order Gas Now" className="btndark"/></a>
+                        <div className="headerUp">
+                            <a href="/#product"><FlatButton title="Order Gas Now" className="btndark"/></a><br/>
                             
-                            
+                             <a href="tel:08138621241" target="_blank" rel="noreferrer">Call Us Now</a>
 
                         </div>
-                        <a href="tel:08138621241" target="_blank" rel="noreferrer">Call Us Now</a>
+                       
                     </div>
 
 
-                     <div className="col-md-6">
+                     <div className="col-md-6 headerUp">
                         <div className="row">
-                        <h3>Why Choose Arkcity?</h3>
+                        <h3 >Why Choose Arkcity?</h3>
                         {headerFeatures.map((feature, index) => (
                         <div key={index} className="col-md-6" style={{...styles.content, flexDirection:'row'}}>
                             {feature.icon}

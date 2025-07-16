@@ -8,7 +8,7 @@ export const Reviews = ()=>{
     return(
         <section>
             <div className="container-fluid">
-                <h2>What Our customers say</h2>
+                <h2 className="animate-down">What Our customers say</h2>
                 <p style={{textAlign:"center"}}>Don't just take our word for it - hear from our satisfied customers</p>
                 {
                     <Marquee>

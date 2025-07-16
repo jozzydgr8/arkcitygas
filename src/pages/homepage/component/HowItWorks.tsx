@@ -18,7 +18,7 @@ export const HowItWorks = ()=>{
     return(
         <section>
             <div className="container-fluid">
-                <h2>How It Works</h2>
+                <h2 className="animate-down">How It Works</h2>
                 <p style={{textAlign:'center'}}>Getting your cooking gas delivered has never been easier</p>
                 <div className="row">
                     <div style={{padding:"24px"}} className="col-md-5">
@@ -31,7 +31,7 @@ export const HowItWorks = ()=>{
                             {
                                 HowItWorksFeatures.map((feature, index)=>(
                                     <Col xs={24} sm={24} md={12}>
-                                    <div className="aboutcard">
+                                    <div className="aboutcard animate-up">
                                         <div>{feature.icon}</div>
                                         <b>{feature.title}</b>
                                         <p>{feature.description}</p>

@@ -12,7 +12,7 @@ export const Product = () => {
   return (
     <section id="#product">
       <div className="container-fluid">
-        <h2>Our Products</h2>
+        <h2 className="animate-down">Our Products</h2>
         <p style={{textAlign:"center"}}>High Quality LPG cylinders and accessories at competitive prices</p>
           <div className='product-category-menu'>
             <h4 onClick={() => setActive('All Products')} className={active === 'All Products' ? 'menu-active' : 'productcategory'}>All Products</h4>

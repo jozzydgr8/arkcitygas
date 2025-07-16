@@ -8,7 +8,7 @@ export const Advertisement = ()=>{
                 <div className="row">
                     { adItems.map((item, index) => (
                         <div className="col-md-4" key={index}>
-                        <div className="advert-box" >
+                        <div className="advert-box animate-up" >
                             <div className="adverthighlight">{item.label}</div>
                             <p>{item.text}</p>
                             {item.button.show && (
