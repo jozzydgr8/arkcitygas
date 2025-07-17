@@ -30,7 +30,7 @@ export default function Session() {
   const navigate = useNavigate()
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const {signInWithEmailAndPassword} = AuthHooks();
+  const {signInWithEmailAndPassword, forgotPassword} = AuthHooks();
 
   const handleSignIn = async (values: formikType) => {
     const {email, password} = values
@@ -139,7 +139,15 @@ export default function Session() {
                   contact Joshua
                 </a>
                 <br/>
-                <span>Forgot Password?</span>
+               {formik.values.email && !formik.errors.email && (
+                <span 
+                  style={{cursor:'pointer', textDecoration:'underline'}} 
+                  onClick={()=>forgotPassword(formik.values.email)}
+                >
+                  Forgot Password?
+                </span>
+              )}
+                
               </Text>
             </div>
           </div>

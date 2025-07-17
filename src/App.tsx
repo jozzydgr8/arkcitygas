@@ -14,6 +14,7 @@ import { ProtectedRoutes } from './shared/ProtectedRoutes';
 import { GuestRoutes } from './shared/GuestRoutes';
 import { AdminRequest } from './admin/pages/AdminRequest';
 import { Loading } from './shared/Loading';
+import { ResetPassword } from './admin/pages/ResetPassword';
 
 function App() {
   const {dispatch, loading} = UseDataContext();
@@ -200,6 +201,7 @@ if(loading || authLoading){
       </Route>
       <Route path='adminrequest' element={<ProtectedRoutes user={user}><AdminRequest/></ProtectedRoutes>}/>
       <Route path='session' element={<GuestRoutes user={user}><Session/></GuestRoutes>}/>
+      <Route path="reset-password" element={<GuestRoutes user={user}><ResetPassword/></GuestRoutes>} />
 
       
 

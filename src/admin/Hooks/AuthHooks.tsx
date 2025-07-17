@@ -1,6 +1,12 @@
 import { toast } from "react-toastify";
 import { UseAuthContext } from "../../context/UseAuthContext";
 
+type resetpassword = {
+    email:string | null,
+    token:string | null,
+    newPassword:string,
+    resetForm:()=>void,
+}
 export const AuthHooks = ()=>{
     const {dispatch} = UseAuthContext();
     type signinProps={
@@ -37,5 +43,43 @@ export const AuthHooks = ()=>{
             setLoading(false)
         }
     }
-    return {signInWithEmailAndPassword}
+
+  const forgotPassword = async (email:string)=>{
+    try{
+        const response = await fetch('https://arkcityserver.vercel.app/user/forgot-password',{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({email:email})
+        });
+        if(!response.ok){
+            throw Error('an error occured')
+        }
+        toast.success('reset password email sent succesfully')
+    }catch(error){
+        toast.error('Sorry. an error occured')
+    }
+  }
+
+  const resetPassword = async ({email, token, newPassword, resetForm}:resetpassword)=>{
+    try{
+        const response = await fetch('https://arkcityserver.vercel.app/user/reset-password',{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({email, token, newPassword})
+        });
+        if(!response.ok){
+            throw Error('an error occured')
+        }
+        toast.success('your password has been rest try relogin')
+    }catch(error){
+        console.error(error);
+        toast.error('an error occured resetting your password');
+        resetForm();
+    }
+  }
+    return {signInWithEmailAndPassword, forgotPassword, resetPassword}
 }
