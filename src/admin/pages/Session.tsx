@@ -140,12 +140,13 @@ export default function Session() {
                 </a>
                 <br/>
                {formik.values.email && !formik.errors.email && (
-                <span 
-                  style={{cursor:'pointer', textDecoration:'underline'}} 
-                  onClick={()=>forgotPassword(formik.values.email)}
+                <FlatButton 
+                  disabled={loading}
+                  
+                  onClick={async()=>{ setLoading(true); await forgotPassword(formik.values.email); setLoading(false)}}
                 >
                   Forgot Password?
-                </span>
+                </FlatButton>
               )}
                 
               </Text>
