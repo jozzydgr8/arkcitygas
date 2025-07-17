@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { UseAuthContext } from "../../context/UseAuthContext";
+import { Navigate, useNavigate } from "react-router-dom";
 
 type resetpassword = {
     email:string | null,
@@ -9,6 +10,7 @@ type resetpassword = {
 }
 export const AuthHooks = ()=>{
     const {dispatch} = UseAuthContext();
+    const navigate = useNavigate();
     type signinProps={
         email:string,
         password:string,
@@ -74,11 +76,13 @@ export const AuthHooks = ()=>{
         if(!response.ok){
             throw Error('an error occured')
         }
-        toast.success('your password has been rest try relogin')
+        toast.success('your password has been reset try relogin');
+        navigate('/admin_jctbdil1$')
+        resetForm();
     }catch(error){
         console.error(error);
         toast.error('an error occured resetting your password');
-        resetForm();
+       
     }
   }
     return {signInWithEmailAndPassword, forgotPassword, resetPassword}

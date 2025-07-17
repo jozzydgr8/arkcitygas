@@ -50,7 +50,7 @@ export const ResetPassword = () => {
         >
     <form onSubmit={props.handleSubmit}>
         <h2>Reset Password for {email}</h2>
-        <Input
+        <Input.Password
             name="newPassword"
             type="password"
             onChange={props.handleChange}
