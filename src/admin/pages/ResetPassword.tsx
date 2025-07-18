@@ -5,7 +5,13 @@ import { FlatButton } from "../../shared/FlatButton";
 import { AuthHooks } from "../Hooks/AuthHooks";
 import * as Yup from 'yup'
 
+
+
+
+
 export const ResetPassword = () => {
+  
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const email = queryParams.get("email");
@@ -28,7 +34,9 @@ export const ResetPassword = () => {
       onSubmit={async (values, { resetForm }) => {
         const { newPassword } = values;
         await resetPassword({ email, token, newPassword, resetForm });
-      }}
+
+        }}
+
     >
       {(props) => (
         <div
@@ -60,7 +68,12 @@ export const ResetPassword = () => {
         {props.errors.newPassword && props.touched.newPassword && (
             <div style={{ color: "red" }}>{props.errors.newPassword}</div>
         )}
-      <FlatButton title="Submit" type="submit" className="btndark" />
+      <FlatButton
+        type="submit"
+        className="btndark"
+        
+        />
+
     </form>
         </div>
       )}

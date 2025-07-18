@@ -3,13 +3,18 @@ import { Form, Input, Typography } from "antd";
 import { CloseOutlined } from '@ant-design/icons';
 import { FlatButton } from "../../shared/FlatButton";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import { AuthHooks } from "../Hooks/AuthHooks";
 
 
+const COOLDOWN_DURATION = 120; // seconds
+const STORAGE_KEY = "reset_password_cooldown";
 
+ 
 const { Text, Title } = Typography;
+
+
 type formikType = {
   email: string;
   password: string;
@@ -27,6 +32,36 @@ const validationSchema = Yup.object({
 });
 
 export default function Session() {
+  const [cooldown, setCooldown] = useState(0);
+  
+    useEffect(() => {
+    // Check localStorage on mount
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const expiresAt = parseInt(stored, 10);
+      const now = Math.floor(Date.now() / 1000);
+      const remaining = expiresAt - now;
+      if (remaining > 0) {
+        setCooldown(remaining);
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+  }, []);
+  
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (cooldown > 0) {
+      timer = setInterval(() => {
+        setCooldown((prev) => {
+          const newVal = prev - 1;
+          if (newVal <= 0) localStorage.removeItem(STORAGE_KEY);
+          return newVal;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [cooldown]);
   const navigate = useNavigate()
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -121,36 +156,35 @@ export default function Session() {
                 />
               </Form.Item>
 
-              <FlatButton title="Submit" onClick={formik.handleSubmit} disabled={loading} className="btndark" />
+              <FlatButton title="Sign In" onClick={formik.handleSubmit} disabled={loading} className="btndark" />
+              <>
+                <FlatButton 
+                className="btnalternate"
+                  disabled={cooldown > 0}
+                  title={ "Reset Password"}
+                  onClick={async()=>{ 
+                    
+                    if(!formik.values.email && !formik.errors.email){
+                      return
+                    }
+                    const expiresAt = Math.floor(Date.now() / 1000) + COOLDOWN_DURATION;
+                      localStorage.setItem(STORAGE_KEY, expiresAt.toString());
+                      setCooldown(COOLDOWN_DURATION);
+                     await forgotPassword(formik.values.email);}}
+                />
+                
+                <p>{cooldown > 0 ? `Wait ${cooldown}s before trying again` : ""}</p>
+                </>
             </Form>
 
-            <div style={{ marginTop: "20px", fontSize: "14px" }}>
-              <Text>
-                Don’t have an account?{" "}
-                <a href="https://wa.link/ubp14t" target="_blank"
-                  style={{
-                    color: "#1890ff",
-                    textDecoration: "underline",
-                    cursor: "pointer",
-                    fontWeight: 'bold'
-                  }}
-                  onClick={() => navigate("/")}
-                >
-                  contact Joshua
-                </a>
-                <br/>
-               {formik.values.email && !formik.errors.email && (
-                <FlatButton 
-                  disabled={loading}
-                  
-                  onClick={async()=>{ setLoading(true); await forgotPassword(formik.values.email); setLoading(false)}}
-                >
-                  Forgot Password?
-                </FlatButton>
-              )}
+           
+             
+             
                 
-              </Text>
-            </div>
+            
+                
+              
+            
           </div>
         </div>
       )}

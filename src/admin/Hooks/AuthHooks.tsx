@@ -40,7 +40,7 @@ export const AuthHooks = ()=>{
         console.log(json)
 
         }catch(error){
-            toast.error('an error occured')
+            toast.error('Incorrect email or password')
         }finally{
             setLoading(false)
         }
