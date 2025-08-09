@@ -65,13 +65,13 @@ function Footer() {
            <Row gutter={[0,12]}>
             <Col style={{ color: '#ccc' }} span={24}>
                 <div>
-                    12 Gas Plant Road <br/>Ikorodu, Lagos
+                    Opp, Isalu pharmacy,<br/>Agbele road Oluodo, <br/>Ikorodu, Lagos
                 </div>
             </Col>
             <Col style={{ color: '#ccc' }} span={24}>
                 <a href='tel:08138621241'target='_blank' rel='noreferrer'><b>Phone</b>:+234 813 8621 241</a><br/>
                 <a href='tel:09165068033'target='_blank' rel='noreferrer'>+234 916 5068 033</a><br/>
-                <a href='mailto:arkcitylpg@gmail.com' target='_blank'rel='noreferrer'><b>Email</b>:arkcitylpg@gmail.com</a><br/>
+                <a href='mailto:info@arkcitylp.com' target='_blank'rel='noreferrer'><b>Email</b>:info@arkcitylp.com</a><br/>
                 <b>Hours</b>: Mon-Sun: 8AM-8PM<br/>
             </Col>
            </Row>

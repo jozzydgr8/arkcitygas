@@ -126,7 +126,7 @@ const items = active === "All Products" ? product : product && product.filter(it
                 <div
             
                     key={product._id}
-                    className="servicegridcontent animate-up"
+                    className="servicegridcontent"
                     style={{
                         border: "solid 1px #d7d9d6",
                         color: "black",

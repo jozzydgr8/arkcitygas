@@ -1,4 +1,4 @@
-import {createRoutesFromElements, RouterProvider, createBrowserRouter, Route, Outlet} from 'react-router-dom'
+import {createRoutesFromElements, RouterProvider, createBrowserRouter, Route, Outlet, Navigate} from 'react-router-dom'
 import { Home } from './pages/homepage/Home';
 import { Main } from './admin/Main';
 import { Dashboard } from './admin/pages/Dashboard';
@@ -190,6 +190,7 @@ if(loading || authLoading){
     <>
     <Route path='/' element={<Outlet/>}>
       <Route index element={<Home/>}/>
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
 
     <Route path='/admin_jctbdil1$'element={<Main/>}>
@@ -204,7 +205,7 @@ if(loading || authLoading){
       <Route path="reset-password" element={<GuestRoutes user={user}><ResetPassword/></GuestRoutes>} />
 
       
-
+     <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
     </>
     
