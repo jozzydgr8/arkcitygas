@@ -1,3 +1,4 @@
+import { MeterList } from "../component/MeterList"
 import { OrderList } from "../component/OrderList"
 import { ProductList } from "../component/ProductList"
 import { UserList } from "../component/UserList"
@@ -17,6 +18,9 @@ export const Dashboard = ()=>{
                     </div>
                     <div className="col-md-6">
                         <UserList/>
+                    </div>
+                    <div className="col-md-6">
+                        <MeterList/>
                     </div>
                 </div>
 

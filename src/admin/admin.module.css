@@ -1,6 +1,13 @@
 
 
 /* admin admin admin */
+.meterscrollable{
+  padding: 15px;
+  height:72vh;
+  overflow-y: auto;
+  
+   margin-bottom: 20px;
+}
 .scrollablediv{
   padding: 15px;
   height:200px;

@@ -192,3 +192,44 @@ export const subscribers = [
   { id: 3, email: 'jozzydgreat2@gmail.com' },
 ];
 
+export const demoReadings = [
+   {
+    "date":"2025-09-06",
+    "openingReading":1234,
+    "closingReading":2344
+  },
+  {
+    "date":"2025-09-05",
+    "openingReading":1234,
+    "closingReading":2344
+  },
+  {
+    
+    "date": "2025-08-28",
+    "openingReading": 12450,
+    "closingReading": 12510,
+    "closingrecordedBy": "John Doe",
+    "openingrecordedBy": "John Doe"
+  },
+  {
+    "date": "2025-08-29",
+    "openingReading": 12510,
+    "closingReading": 12575,
+    "closingrecordedBy": "Jane Smith",
+    "openingrecordedBy": "Jane Smith"
+  },
+  {
+    "date": "2025-08-30",
+    "openingReading": 12575,
+    "closingReading": 12620,
+    "closingrecordedBy": "Ali Khan",
+    "openingrecordedBy": "Ali Khan"
+  },
+  {
+    "date": "2025-08-31",
+    "openingReading": 12620,
+    "closingReading": 12690,
+    "closingrecordedBy": "Maria Lopez",
+    "openingrecordedBy": "Maria Lopez"
+  }
+]
