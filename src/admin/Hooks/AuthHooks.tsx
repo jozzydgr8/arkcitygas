@@ -8,6 +8,14 @@ type resetpassword = {
     newPassword:string,
     resetForm:()=>void,
 }
+const saveUserToLocalStorage = (user:any) => {
+  const data = {
+    user,
+    savedAt: new Date().getTime(), // timestamp in milliseconds
+  };
+  localStorage.setItem('user', JSON.stringify(data));
+};
+
 export const AuthHooks = ()=>{
     const {dispatch} = UseAuthContext();
     const navigate = useNavigate();
@@ -35,7 +43,8 @@ export const AuthHooks = ()=>{
         if (!response.ok) {
             throw new Error(json.message || 'Failed to sign in');
         }
-        localStorage.setItem('user',JSON.stringify(json));
+        saveUserToLocalStorage(json);
+        
         dispatch({type:'getUser', payload:json});
         console.log(json)
 

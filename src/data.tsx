@@ -193,6 +193,21 @@ export const subscribers = [
 ];
 
 export const demoReadings = [
+  {
+    "date":"2025-09-06",
+    "openingReading":1234,
+    "closingReading":2344
+  },
+  {
+    "date":"2025-09-06",
+    "openingReading":1234,
+    "closingReading":2344
+  },
+  {
+    "date":"2025-09-06",
+    "openingReading":1234,
+    "closingReading":2344
+  },
    {
     "date":"2025-09-06",
     "openingReading":1234,

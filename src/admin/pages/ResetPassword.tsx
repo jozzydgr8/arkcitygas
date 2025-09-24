@@ -71,6 +71,7 @@ export const ResetPassword = () => {
       <FlatButton
         type="submit"
         className="btndark"
+        title="submit"
         
         />
 

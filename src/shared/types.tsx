@@ -44,3 +44,10 @@ export type User = {
     token?:string,
     admin?:true
 }
+
+export type readType = {
+  _id?:string,
+  openingReading:number,
+  closingReading?:number,
+  createdAt:string
+}

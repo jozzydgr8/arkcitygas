@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { OrderType, ProductType, User } from "../shared/types";
+import { OrderType, ProductType, User, readType } from "../shared/types";
 
 export type valueProps = stateProps & {
   dispatch: React.Dispatch<actionProps>;
@@ -16,7 +16,13 @@ type stateProps = {
   searchQuery:string | null;
   admin:User[] | null;
   subscribers:User[] | null;
+  readings:readType[] | null;
 };
+
+type readProps = {
+  type:'getReadings',
+  payload:readType[] | null
+}
 
 type productProps = {
   type: "getProduct";
@@ -45,6 +51,10 @@ type updateOrderProps = {
   type: "updateOrder";
   payload: OrderType;
 };
+type updateReadingProps ={
+  type:'updateReadings';
+  payload:readType
+}
 type searchProps = {
   type:'searchQuery';
   payload:string | null
@@ -75,7 +85,7 @@ type subscribeProps ={
   payload:User[]
 }
 
-type actionProps = subscribeProps | createadminProps | deletadminProps | updateadminProps | adminProps | productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps | postprops;
+type actionProps = updateReadingProps|readProps | subscribeProps | createadminProps | deletadminProps | updateadminProps | adminProps | productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps | postprops;
 
 const initialState: stateProps = {
   product: null,
@@ -83,7 +93,8 @@ const initialState: stateProps = {
   orders: null,
   searchQuery: null,
   admin:null,
-  subscribers:null
+  subscribers:null,
+  readings:null
 };
 
 export const Context = createContext({} as valueProps);
@@ -122,6 +133,13 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
         p._id === action.payload._id ? action.payload : p
       ) ?? null,
     };
+    case "updateReadings":
+      return{
+        ...state,
+        readings:state.readings?.map(r=>
+          r._id === action.payload._id?action.payload : r
+        ) ?? null,
+      }
 
     case 'getadmin':
       return {...state, admin:action.payload, loading:false};
@@ -156,7 +174,10 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
         ...state, subscribers:action.payload, loading:false
       }
 
-
+      case "getReadings":
+        return{
+          ...state, readings:action.payload, loading:false
+        }
   
     default:
       return state;

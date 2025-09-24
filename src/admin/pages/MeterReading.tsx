@@ -14,8 +14,9 @@ export const MeterReading = ()=>{
                     
                     <div className={Style.meterscrollable}>
                         <ReadingsTable/>
-                        <DownloadCSVButton/>
+                        
                     </div>
+                    <DownloadCSVButton/>
                     </div>
                     <div className="col-md-5">
                         <div className={Style.ordercontainer}>

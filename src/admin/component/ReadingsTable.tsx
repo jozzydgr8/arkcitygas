@@ -1,10 +1,10 @@
 import { Table } from "antd";
-import { demoReadings } from "../../data";
+import { UseDataContext } from "../../context/UseDataContext";
 
 const columns = [
   {
     title: "Date",
-    dataIndex: "date",
+    dataIndex: "createdAt",
     key: "date",
   },
   {
@@ -20,12 +20,13 @@ const columns = [
 ];
 
 export const ReadingsTable = () => {
+  const {readings} = UseDataContext();
   return (
     <div >
      
       <Table
         columns={columns}
-        dataSource={demoReadings.map((reading, index) => ({
+        dataSource={(readings ?? []).map((reading, index) => ({
           key: index,
           ...reading,
         }))}

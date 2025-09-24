@@ -1,20 +1,21 @@
 import styles from '../admin.module.css'
-import { demoReadings } from '../../data'
 import { NavLink } from 'react-router-dom'
 import { FlatButton } from '../../shared/FlatButton'
+import { UseDataContext } from '../../context/UseDataContext'
 export const MeterList = ()=>{
+    const{readings} = UseDataContext()
     return(
         <>
             <h3>Daily Meter Readings</h3>
             <div className={styles.scrollablediv}>
                 {
-                    demoReadings.map((reading, index) => (
+                    readings && readings.map((reading, index) => (
                         <div key={index} className={styles.readingItem}>
-                            <span>{reading.date}</span><br/>
+                            <span>{reading.createdAt}</span><br/>
                             <strong>Opening: </strong><span>{reading.openingReading}</span><br/>
-                            <strong>Recorded by: </strong><span>{reading.openingrecordedBy}</span><br/>
+                      
                             <strong>Closing: </strong><span>{reading.closingReading}</span><br/>
-                            <strong>Recorded by: </strong><span>{reading.closingrecordedBy}</span>
+                           
                         </div>
                     ))
                 }

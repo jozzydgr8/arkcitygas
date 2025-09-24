@@ -20,6 +20,7 @@ import { MeterReading } from './admin/pages/MeterReading';
 function App() {
   const {dispatch, loading} = UseDataContext();
   const {dispatch:handle, loading:authLoading, user} = UseAuthContext();
+
 //useEffect to fetch product
 useEffect(()=>{
   dispatch({type:"loading", payload:true})
@@ -44,13 +45,53 @@ useEffect(()=>{
 },[]);
 
 //useffect for authentication
+useEffect(() => {
+  handle({ type: 'loading', payload: true });
+
+  const data = localStorage.getItem('user');
+  if (data) {
+    try {
+      const parsed = JSON.parse(data);
+      const now = new Date().getTime();
+      const expiryDays = 3;
+      const expiryTime = expiryDays * 24 * 60 * 60 * 1000; // days to ms
+
+      if (now - parsed.savedAt < expiryTime) {
+        // Not expired
+        handle({ type: 'getUser', payload: parsed.user });
+      } else {
+        // Expired
+        localStorage.removeItem('user');
+      }
+    } catch (e) {
+      console.error('Failed to parse user data:', e);
+      localStorage.removeItem('user');
+    }
+  }
+
+  handle({ type: 'loading', payload: false });
+}, []);
+
+
+//useeffect to fetch readings
 useEffect(()=>{
-handle({type:'loading',payload:true})
-const user = localStorage.getItem('user');
-if(user){
-  handle({type:'getUser', payload:JSON.parse(user)})
-}
-handle({type:'loading',payload:false})
+  dispatch({type:"loading", payload:true});
+  const fetchReadings = async()=>{
+    try{
+      const data = await fetch('https://arkcityserver.vercel.app/reading');
+      if(!data){
+        throw Error('error getting readings')
+      }
+      const json = await data.json();
+      dispatch({type:'getReadings', payload:json});
+      dispatch({type:'loading', payload:false});
+      console.log('readings', json);
+    }catch(error){
+      console.error(error);
+      dispatch({type:'loading', payload:false})
+    }
+  }
+  fetchReadings();
 },[])
 
 //useeffect to fetch orders
