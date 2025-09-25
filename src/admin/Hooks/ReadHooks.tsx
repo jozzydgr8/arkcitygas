@@ -1,8 +1,10 @@
 import { toast } from "react-toastify";
 import { UseDataContext } from "../../context/UseDataContext";
+import { UseAuthContext } from "../../context/UseAuthContext";
 
 export const ReadHooks = ()=>{
-    const {dispatch} = UseDataContext()
+    const {dispatch} = UseDataContext();
+    const {user} = UseAuthContext();
     const addOpeningReading = async (openingReading: number,  setLoading: React.Dispatch<React.SetStateAction<boolean>>, resetForm: () => void)=>{
        setLoading(true)
         try{
@@ -10,7 +12,9 @@ export const ReadHooks = ()=>{
             const result = await fetch('https://arkcityserver.vercel.app/reading',{
                 method:'POST',
                 headers:{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    'Authorization': `Bearer ${user?.token}`,
+    
                 },
                 body:JSON.stringify({openingReading:openingReading})
             });
@@ -37,7 +41,8 @@ export const ReadHooks = ()=>{
                 const response = await fetch(`https://arkcityserver.vercel.app/reading/${id}`,{
                     method:'PUT',
                     headers:{
-                        "Content-Type":"application/json"
+                        "Content-Type":"application/json",
+                        'Authorization': `Bearer ${user?.token}`,
                     },
                     body:JSON.stringify({closingReading:closingReading})
                 })

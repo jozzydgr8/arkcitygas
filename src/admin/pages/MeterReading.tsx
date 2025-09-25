@@ -1,4 +1,4 @@
-import { demoReadings } from "../../data"
+
 import Style from '../admin.module.css'
 import { DownloadCSVButton } from "../component/DownloadCSVButton"
 import { ReadingForm } from "../component/ReadingForm"

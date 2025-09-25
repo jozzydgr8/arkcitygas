@@ -78,8 +78,14 @@ useEffect(()=>{
   dispatch({type:"loading", payload:true});
   const fetchReadings = async()=>{
     try{
-      const data = await fetch('https://arkcityserver.vercel.app/reading');
-      if(!data){
+      const data = await fetch('https://arkcityserver.vercel.app/reading',
+        {
+          headers:{
+          'Authorization': `Bearer ${user?.token}`,
+        }
+        }
+      );
+      if(!data.ok){
         throw Error('error getting readings')
       }
       const json = await data.json();

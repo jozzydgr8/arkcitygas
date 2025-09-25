@@ -19,6 +19,7 @@ export const MeterList = ()=>{
                         </div>
                     ))
                 }
+                {readings?.length==0 && <small style={{color:"gray"}}>recent orders will display here...</small>}
             </div>
             <div>
                 <NavLink to='/admin_jctbdil1$/meterreading' ><FlatButton className='btndark' title='View Readings'/></NavLink>
