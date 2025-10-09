@@ -166,12 +166,16 @@ const items = active === "All Products" ? product : product && product.filter(it
 
                         {/* Button to open modal */}
                         <div style={{ marginTop: "auto" }}>
-                        {product.cost > 0 && 
+                        {product.cost > 0 ?
                         <FlatButton
                             className="btndark"
                             onClick={() => handleOpenModal(product)}
                             title={`BUY NOW - ₦${product.cost}`}
-                        />}
+                        /> :
+                        <a href="tel:08138621241" target="_blank">
+                            <FlatButton title="Contact Us" className="btndark"/>
+                        </a>
+                        }
                         </div>
                     </div>
                     </div>
