@@ -38,7 +38,7 @@ export const Header = ()=>{
                             Certified by DPR and <a href="https://son.gov.ng/" target="_blank" rel="noreferrer">SON</a> for your safety.
                         </p>
                         <div className="headerUp">
-                            <a href="/#product"><FlatButton title="Order Gas Now" className="btndark"/></a><br/>
+                            <a href="/#product"><FlatButton title="Order Now" className="btndark"/></a><br/>
                             
                              <a href="tel:08138621241" target="_blank" rel="noreferrer">Call Us Now</a>
 
