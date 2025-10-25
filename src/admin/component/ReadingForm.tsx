@@ -9,53 +9,48 @@ import { formatDateHook } from "../Hooks/FormatDateHook";
 export const ReadingForm = () => {
 const [loading, setLoading]=useState(false);
 const {readings} = UseDataContext();
-const {addOpeningReading, updateClosingReading} = ReadHooks();
+const {addDailyReading, addRefill} = ReadHooks();
   const today = new Date().toISOString().split("T")[0]; // e.g., "2025-09-05"
 
-  // Check if there's a reading for today that has an openingReading
+  // Check if there's a reading for today that has an dailyReading
   const hasOpeningReadingToday = (readings ?? []).some(
     (reading) =>
-      formatDateHook(reading.createdAt) === today && reading.openingReading && reading.openingReading !== null
+      formatDateHook(reading.createdAt) === today && reading.dailyReading && reading.dailyReading !== null
   );
-  //check if today reading has closingreading
- const hasClosingReadingToday = (readings ?? []).some(
-  (reading) =>
-    formatDateHook(reading.createdAt) === today &&
-    reading.closingReading != null // checks for both null and undefined
-);
+  
 
   //find today reading
   const todayReading = (readings ?? []).find(
   (reading) =>
     formatDateHook(reading.createdAt) === today &&
-    reading.openingReading !== null
+    reading.dailyReading !== null
 );
 
 
   return (
     <>
       <Formik
-        initialValues={{ openingReading: "" }}
+        initialValues={{ dailyReading: "" }}
         onSubmit={(values, { resetForm }) => {
-            const {openingReading} = values
-          addOpeningReading(Number(openingReading), setLoading, resetForm);
+            const {dailyReading} = values
+          addDailyReading(Number(dailyReading), setLoading, resetForm);
           
         }}
       >
         {({ values, handleSubmit, handleChange }) => (
           <Form layout="vertical"
-        //    disabled={hasOpeningReadingToday}
+            disabled={hasOpeningReadingToday}
            >
-            <Form.Item label="Opening reading">
+            <Form.Item label="Daily reading">
               <Input
                 type="number"
-                name="openingReading"
-                value={values.openingReading}
+                name="dailyReading"
+                value={values.dailyReading}
                 required
-                placeholder="Open Reading"
+                placeholder="Daily Reading"
                 onChange={handleChange}
               />
-              {!hasOpeningReadingToday?<span style={{color:'red'}}>Please input correct opening readings!</span>:<span style={{color:'green'}}>Opening readings set!</span>}
+              {!hasOpeningReadingToday?<span style={{color:'red'}}>Please input correct daily readings!</span>:<span style={{color:'green'}}>Opening readings set!</span>}
             </Form.Item>
              <Popconfirm
                 title="Are you sure reading is correct?"
@@ -77,45 +72,39 @@ const {addOpeningReading, updateClosingReading} = ReadHooks();
       </Formik>
 
       <Formik
-        initialValues={{ closeReading: "" }}
+        initialValues={{ refill: "" }}
         onSubmit={(values, { resetForm }) => {
-        const { closeReading } = values;
-
-        if (todayReading && todayReading._id) {
-            updateClosingReading(todayReading._id, Number(closeReading), resetForm, setLoading);
-        } else {
-            console.error("No valid reading for today found.");
-        }
+        const { refill } = values;
+          addRefill(Number(refill), resetForm, setLoading)
         }}
 
       >
         {({ values, handleSubmit, handleChange }) => (
-          <Form layout="vertical" disabled={!hasOpeningReadingToday || hasClosingReadingToday}>
-            <Form.Item label="Closing reading">
+          <Form layout="vertical">
+            <Form.Item label="refill">
               <Input
                 type="number"
-                name="closeReading"
-                value={values.closeReading}
+                name="refill"
+                value={values.refill}
                 required
-                placeholder="Close Reading"
+                placeholder="Input Refill Value"
                 onChange={handleChange}
               />
-              {hasOpeningReadingToday && !hasClosingReadingToday?<span style={{color:"red"}}>Please input Closing reading for today!</span>
-              :!hasOpeningReadingToday?<span>Opening readings needs to be set</span>:<span style={{color:"green"}}>Closing reading has been succesfully updated!</span>}
+              
             </Form.Item>
 
             <Popconfirm
-                title="Are you sure reading is correct?"
+                title="Are you sure refill is correct?"
                 onConfirm={() => handleSubmit()}
                 okText="Yes"
                 cancelText="No"
-                disabled={!hasOpeningReadingToday || hasClosingReadingToday || loading}>
+                disabled={loading}>
                 <span>
                     <FlatButton
                     title="Submit"
                     onClick={handleSubmit}
                     className="btndark"
-                    disabled={!hasOpeningReadingToday || hasClosingReadingToday || loading}
+                    disabled={loading}
                     />
                 </span>
 

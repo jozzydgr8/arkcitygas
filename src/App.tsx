@@ -100,6 +100,57 @@ useEffect(()=>{
   fetchReadings();
 },[])
 
+//useEffect to fetch combined readings 
+useEffect(()=>{
+  const fetchCombined = async ()=>{
+    try{
+      const data = await fetch('https://arkcityserver.vercel.app/reading_combined',
+        {
+          headers:{
+            'Authorization': `Bearer ${user?.token}`,
+          }
+        }
+      );
+      if(!data.ok){
+        throw Error('error fetching data');
+      }
+      const json = await data.json();
+      dispatch({type:'getCombined', payload:json});
+      dispatch({type:'loading', payload:false});
+      console.log('combined_readings', json);
+    }catch(error){
+      console.error(error)
+    }
+  };
+
+  fetchCombined()
+}, []);
+
+//useEffect to fetchTotal
+useEffect(()=>{
+  const fetchTotal = async ()=>{
+    try{
+      const data = await fetch('https://arkcityserver.vercel.app/reading_total',
+        {
+          headers:{
+            'Authorization': `Bearer ${user?.token}`,
+          }
+        }
+      );
+      if(!data.ok){
+        throw Error('error fetching total readings');
+      }
+      const json = await data.json();
+      dispatch({type:'getTotal', payload:json});
+      dispatch({type:'loading', payload:false});
+      console.log('total', json);
+    }catch(error){
+      console.error(error)
+    }
+  }
+  fetchTotal();
+},[])
+
 //useeffect to fetch orders
 
 useEffect(()=>{

@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { OrderType, ProductType, User, readType } from "../shared/types";
+import { OrderType, ProductType, User, readType, CombinedRecord, totalType } from "../shared/types";
 
 export type valueProps = stateProps & {
   dispatch: React.Dispatch<actionProps>;
@@ -17,11 +17,23 @@ type stateProps = {
   admin:User[] | null;
   subscribers:User[] | null;
   readings:readType[] | null;
+  combined:CombinedRecord[] | null;
+  total:totalType[] | null
 };
 
 type readProps = {
   type:'getReadings',
   payload:readType[] | null
+}
+
+type combinedProps = {
+  type:'getCombined',
+  payload:CombinedRecord[] | null
+}
+
+type totalProps = {
+  type: 'getTotal',
+  payload:totalType[] | null;
 }
 
 type productProps = {
@@ -55,6 +67,17 @@ type updateReadingProps ={
   type:'updateReadings';
   payload:readType
 }
+type updateCombinedProps = {
+  type:'updateCombined';
+  payload:CombinedRecord
+
+}
+
+type updateTotalProps = {
+  type:'updateTotal';
+  payload:totalType
+}
+
 type searchProps = {
   type:'searchQuery';
   payload:string | null
@@ -85,7 +108,7 @@ type subscribeProps ={
   payload:User[]
 }
 
-type actionProps = updateReadingProps|readProps | subscribeProps | createadminProps | deletadminProps | updateadminProps | adminProps | productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps | postprops;
+type actionProps = totalProps| updateTotalProps |combinedProps | updateCombinedProps | updateReadingProps|readProps | subscribeProps | createadminProps | deletadminProps | updateadminProps | adminProps | productProps | orderProps | loadingProps | deleteProps |updateProductProps | updateOrderProps | searchProps | postprops;
 
 const initialState: stateProps = {
   product: null,
@@ -94,7 +117,9 @@ const initialState: stateProps = {
   searchQuery: null,
   admin:null,
   subscribers:null,
-  readings:null
+  readings:null,
+  total:null,
+  combined:null
 };
 
 export const Context = createContext({} as valueProps);
@@ -123,23 +148,16 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
     return {
       ...state,
       product: state.product?.map(p =>
-        p._id === action.payload._id ? action.payload : p
+        p._id === action.payload._id ? {...action.payload} : p
       ) ?? null,
     };
      case "updateOrder":
     return {
       ...state,
       orders: state.orders?.map(p =>
-        p._id === action.payload._id ? action.payload : p
+        p._id === action.payload._id ? {...action.payload} : p
       ) ?? null,
     };
-    case "updateReadings":
-      return{
-        ...state,
-        readings:state.readings?.map(r=>
-          r._id === action.payload._id?action.payload : r
-        ) ?? null,
-      }
 
     case 'getadmin':
       return {...state, admin:action.payload, loading:false};
@@ -152,7 +170,7 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
         ...state,
         admin: exists
           ? currentAdmins.map(p =>
-              p.email === action.payload.email ? action.payload : p
+              p.email === action.payload.email ? {...action.payload} : p
             )
           : [...currentAdmins, action.payload],
       };
@@ -178,7 +196,37 @@ const reducer = (state: stateProps, action: actionProps): stateProps => {
         return{
           ...state, readings:action.payload, loading:false
         }
-  
+
+        case "updateReadings":
+          return{
+            ...state, 
+            readings:state.readings?.map(r=>
+              r._id === action.payload._id ? {...action.payload}:r)?? null,
+          }
+        case "getCombined":
+          return{
+            ...state, combined:action.payload, loading:false
+          }
+
+          case "updateCombined":
+            return {
+              ...state,
+              combined: state.combined?.map(c =>
+                c.id === action.payload.id ? {...action.payload} : c
+              ) ?? null,
+            };
+          case "getTotal":
+            return{
+              ...state, total:action.payload, loading:false
+            }
+            case "updateTotal":
+              return {
+              ...state,
+              total: state.total?.map(t =>
+                t._id === action.payload._id ? {...action.payload} : t
+              ) ?? null,
+            };
+          
     default:
       return state;
   }

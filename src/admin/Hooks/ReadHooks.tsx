@@ -5,7 +5,7 @@ import { UseAuthContext } from "../../context/UseAuthContext";
 export const ReadHooks = ()=>{
     const {dispatch} = UseDataContext();
     const {user} = UseAuthContext();
-    const addOpeningReading = async (openingReading: number,  setLoading: React.Dispatch<React.SetStateAction<boolean>>, resetForm: () => void)=>{
+    const addDailyReading = async (dailyReading: number,  setLoading: React.Dispatch<React.SetStateAction<boolean>>, resetForm: () => void)=>{
        setLoading(true)
         try{
 
@@ -16,51 +16,51 @@ export const ReadHooks = ()=>{
                     'Authorization': `Bearer ${user?.token}`,
     
                 },
-                body:JSON.stringify({openingReading:openingReading})
+                body:JSON.stringify({closingReading:dailyReading})
             });
             if(!result.ok){
                 throw Error('error adding reading');
             }
             const json = await result.json();
-            dispatch({type:'updateReadings', payload:json});
+            dispatch({type:'updateCombined',payload:json})
             resetForm();
             toast.success('Daily Opening reading set successfully');
-            window.location.reload();
-            setLoading(false);
-            
         }catch(error){
-            console.error(error);
-            toast.error('error setting opening reading');
-            setLoading(false);
+            console.error( error);
+            toast.error('error setting daily reading');
+            
+        }finally{
+        setLoading(false);
         }
     }
 
-    const updateClosingReading =async (id:string, closingReading:number, resetForm:()=>void, setLoading: React.Dispatch<React.SetStateAction<boolean>>)=>{
+    const addRefill =async ( refill:number, resetForm:()=>void, setLoading: React.Dispatch<React.SetStateAction<boolean>>)=>{
         setLoading(true);    
         try{
-                const response = await fetch(`https://arkcityserver.vercel.app/reading/${id}`,{
-                    method:'PUT',
+                const response = await fetch(`https://arkcityserver.vercel.app/reading_refill`,{
+                    method:'POST',
                     headers:{
-                        "Content-Type":"application/json",
+                        'Content-Type':'application/json',
                         'Authorization': `Bearer ${user?.token}`,
                     },
-                    body:JSON.stringify({closingReading:closingReading})
+                    body:JSON.stringify({refill})
                 })
                 if(!response.ok){
-                    throw Error('error adding closing reading');
+                    throw Error('error adding refill');
                 }
                 const json = await response.json();
-                toast.success('success adding closing reading');
+                toast.success('success adding refill');
                 resetForm();
-                window.location.reload();
-                setLoading(false);
+                dispatch({type:'updateCombined',payload:json})
+                //window.location.reload();
+               
                 
             }catch(error){
                 console.error(error);
-                toast.error('error adding closing reading');
-               
-                setLoading(false);
+                toast.error('error adding refill');
+            }finally{
+                 setLoading(false);
             }
         }
-    return{addOpeningReading, updateClosingReading}
+    return{addDailyReading, addRefill}
 }

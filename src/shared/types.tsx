@@ -47,7 +47,22 @@ export type User = {
 
 export type readType = {
   _id?:string,
-  openingReading:number,
-  closingReading?:number,
+  dailyReading:number,
+  balance?:number,
   createdAt:string
 }
+
+export type totalType = {
+  _id?:string,
+  currentBalance:number
+}
+
+export type CombinedRecord = {
+  id: string;
+  date: string;
+  type: "sale" | "refill";
+  unitSold: number | null;
+  amountAdded: number | null;
+  balanceAfter: number;
+};
+
