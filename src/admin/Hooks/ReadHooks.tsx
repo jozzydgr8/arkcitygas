@@ -31,6 +31,7 @@ export const ReadHooks = ()=>{
             
         }finally{
         setLoading(false);
+        window.location.reload();
         }
     }
 
@@ -52,7 +53,7 @@ export const ReadHooks = ()=>{
                 toast.success('success adding refill');
                 resetForm();
                 dispatch({type:'updateCombined',payload:json})
-                //window.location.reload();
+                
                
                 
             }catch(error){
@@ -60,6 +61,7 @@ export const ReadHooks = ()=>{
                 toast.error('error adding refill');
             }finally{
                  setLoading(false);
+                 window.location.reload();
             }
         }
     return{addDailyReading, addRefill}
