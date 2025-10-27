@@ -46,7 +46,7 @@ export const About = ()=>{
                 <div>
                     <Row gutter={[16,24]}>
                         {aboutFeatures.map((feature, index)=>(
-                            <Col xs={24} sm={12} md={8}>
+                            <Col xs={24} sm={12} md={8} key={index}>
                             <div className="aboutcard animate-up">
                                 <div>{feature.icon}</div>
                                 <h3>{feature.title}</h3>

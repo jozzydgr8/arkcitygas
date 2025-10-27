@@ -25,9 +25,9 @@ export const Reviews = ()=>{
                                     <div>
                                         <h4>{review.fullName}</h4>
                                         <small>{review.status}</small>
-                                        <p>
+                                        <div>
                                             <Rate  disabled defaultValue={review.rating}/>
-                                        </p>
+                                        </div>
                                     </div>
                                     <div>
 

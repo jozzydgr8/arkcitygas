@@ -98,7 +98,7 @@ useEffect(()=>{
     }
   }
   fetchReadings();
-},[])
+},[user])
 
 //useEffect to fetch combined readings 
 useEffect(()=>{
@@ -124,7 +124,7 @@ useEffect(()=>{
   };
 
   fetchCombined()
-}, []);
+}, [user]);
 
 //useEffect to fetchTotal
 useEffect(()=>{
@@ -149,7 +149,7 @@ useEffect(()=>{
     }
   }
   fetchTotal();
-},[])
+},[user])
 
 //useeffect to fetch orders
 

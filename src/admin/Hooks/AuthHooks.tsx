@@ -46,7 +46,7 @@ export const AuthHooks = ()=>{
         saveUserToLocalStorage(json);
         
         dispatch({type:'getUser', payload:json});
-        console.log(json)
+        
 
         }catch(error){
             toast.error('Incorrect email or password')

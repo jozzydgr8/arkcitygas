@@ -62,6 +62,7 @@ export type CombinedRecord = {
   date: string;
   type: "sale" | "refill";
   unitSold: number | null;
+  totalSold:number | null;
   amountAdded: number | null;
   balanceAfter: number;
 };

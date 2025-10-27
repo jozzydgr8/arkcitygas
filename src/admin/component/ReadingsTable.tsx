@@ -28,6 +28,12 @@ const columns = [
     render: (val:null|number) => (val !== null ? val : "-"),
   },
   {
+    title: "Total Units Sold",
+    dataIndex:"totalSold",
+    key: "totalSold",
+    render:(val:null|number)=>(val !== null ? val : "-"),
+  },
+  {
     title: "Amount Added",
     dataIndex: "amountAdded",
     key: "amountAdded",
