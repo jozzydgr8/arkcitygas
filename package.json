@@ -1,5 +1,5 @@
 {
-  "homepage": "https://arkcitylp.com/",
+  "homepage": "https://www.arkcitylp.com/",
   "name": "arkcitylp",
   "version": "0.1.0",
   "private": true,
@@ -17,6 +17,7 @@
     "dayjs": "^1.11.18",
     "dotenv": "^16.5.0",
     "formik": "^2.4.6",
+    "gh-pages": "^6.3.0",
     "install": "^0.13.0",
     "papaparse": "^5.5.3",
     "react": "^19.1.0",
