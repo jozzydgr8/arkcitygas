@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FlatButton } from "../../shared/FlatButton";
 import { dataType, paystacksuccesresponse, ProductType } from "../../shared/types";
-import { ModalComponent } from "../homepage/component/ModalComponent";
+import { ModalComponent } from "../homepage/components/ModalComponent";
 import { UseDataContext } from "../../context/UseDataContext";
 import { toast } from "react-toastify";
 
