@@ -1,4 +1,5 @@
-import {createRoutesFromElements, RouterProvider, createBrowserRouter, Route, Outlet, Navigate} from 'react-router-dom'
+import {createRoutesFromElements, RouterProvider, createBrowserRouter,
+   Route, Outlet, Navigate,} from 'react-router-dom'
 import { Home } from './pages/homepage/Home';
 import { Main } from './admin/Main';
 import { Dashboard } from './admin/pages/Dashboard';
