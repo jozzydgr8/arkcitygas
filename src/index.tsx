@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { DataContext } from './context/DataContext';
 import { ContextAuth } from './context/AuthContext';
-import { HashRouter } from 'react-router-dom';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -13,9 +13,9 @@ root.render(
   <React.StrictMode>
     <DataContext>
       <ContextAuth>
-        <HashRouter>
+        
           <App />
-        </HashRouter>
+        
       </ContextAuth>
     </DataContext>
   </React.StrictMode>
