@@ -1,4 +1,4 @@
-import {createRoutesFromElements, RouterProvider, createHashRouter,
+import {createRoutesFromElements, RouterProvider, createBrowserRouter,
    Route, Outlet, Navigate,} from 'react-router-dom'
 import { Home } from './pages/homepage/Home';
 import { Main } from './admin/Main';
@@ -286,7 +286,7 @@ if(loading || authLoading){
 
 
 
-  const router = createHashRouter(createRoutesFromElements(
+  const router = createBrowserRouter(createRoutesFromElements(
     <>
     <Route path='/' element={<Outlet/>}>
       <Route index element={<Home/>}/>
