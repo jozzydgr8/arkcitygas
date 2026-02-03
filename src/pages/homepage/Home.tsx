@@ -1,12 +1,12 @@
 
 import Footer from "../../shared/Footer"
-import { About } from "./component/About"
-import { Advertisement } from "./component/Advertisement"
-import { Choose } from "./component/Choose"
-import { Header } from "./component/Header"
-import { HowItWorks } from "./component/HowItWorks"
-import { Product } from "./component/Product"
-import { Reviews } from "./component/Reviews"
+import { About } from "./components/About"
+import { Advertisement } from "./components/Advertisement"
+import { Choose } from "./components/Choose"
+import { Header } from "./components/Header"
+import { HowItWorks } from "./components/HowItWorks"
+import { Product } from "./components/Product"
+import { Reviews } from "./components/Reviews"
 
 export const Home = ()=>{
     return(
