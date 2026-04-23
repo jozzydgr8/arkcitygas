@@ -177,9 +177,12 @@ function Footer() {
 
       {/* Footer Bottom */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 40 }}>
-        <a href="https://jozzycodes.com/" target="_blank" rel="noopener noreferrer">© 2025 Arkcity LPG</a>
-      
+        <a href="https://arkcitylp.com/" target="_blank" rel="noopener noreferrer">© 2025 Arkcity LPG</a>
+      <div>
+        <small > <a style={{color:'gray'}} href='https://jozzycodes.com'>Built by jozzycodes</a></small>
       </div>
+      </div>
+      
     </section>
   );
 }
